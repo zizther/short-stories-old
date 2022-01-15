@@ -64,7 +64,7 @@ class Toolbox
         $matches = [];
 
         $matchFound = preg_match_all(
-            "/\b(" . implode(self::BAD_WORDS,"|") . ")\b/i",
+            "/\b(" . implode("|", self::BAD_WORDS) . ")\b/i",
             $text,
             $matches
         );
