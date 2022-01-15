@@ -1,0 +1,56 @@
+{% extends "_layouts/_layout" %}
+
+{# If already logged in, then go to account page #}
+{% if currentUser %}
+	{% redirect "account" %}
+{% endif %}
+
+{% set title = 'Signup' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+
+	<div class="member-activation-content">
+		<h2>{{ title }}</h2>
+
+		<form method="post" accept-charset="UTF-8">
+		    {{ csrfInput() }}
+            {{ redirectInput('account') }}
+		    <input type="hidden" name="action" value="users/saveUser">
+
+		    {% macro errorList(errors) %}
+		        {% if errors %}
+		            <div class="message message-small message-error">
+		                {% for error in errors %}
+		                    <p>{{ error }}</p>
+		                {% endfor %}
+		            </div>
+		        {% endif %}
+		    {% endmacro %}
+
+		    {% from _self import errorList %}
+
+		    <input id="username" class="form-element" type="text" name="username" placeholder="Username"
+		        {%- if account is defined %} value="{{ account.username }}"{% endif -%}>
+
+		    {% if account is defined %}
+		        {{ errorList(account.getErrors('username')) }}
+		    {% endif %}
+
+		    <input id="email" class="form-element" type="text" name="email" placeholder="Email"
+		        {%- if account is defined %} value="{{ account.email }}"{% endif %}>
+
+		    {% if account is defined %}
+		        {{ errorList(account.getErrors('email')) }}
+		    {% endif %}
+
+		    <input id="password" class="form-element" type="password" name="password" placeholder="Password">
+
+		    {% if account is defined %}
+		        {{ errorList(account.getErrors('password')) }}
+		    {% endif %}
+
+		    <button class="button" type="submit">Signup</button>
+		</form>
+	</div><!-- / .member-activation-content -->
+{% endblock %}

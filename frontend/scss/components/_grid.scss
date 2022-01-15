@@ -1,0 +1,41 @@
+/*** Grid ***/
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 25px 0;
+
+    @media #{$bp-small} {
+        margin-left: -.5%;
+        margin-right: -.5%;
+        width: 101.5%;
+    }
+
+    .excerpt {
+        background: $white;
+        display: flex;
+        margin: .5rem 0; // Use .5rem for Firefox fix
+        position: relative;
+        width: 100%;
+
+        @media #{$bp-small} {
+            margin-left: .46%; // .46% on left and right for Safari fix - miscalculates.
+			margin-right: .46%; // .46% on left and right for Safari fix - miscalculates.
+            width: 49%;
+        }
+        @media #{$bp-medium} {
+            width: 32.33333%;
+        }
+        @media #{$bp-large} {
+            width: 24%;
+        }
+    }
+    .col-frm {
+        display: block;
+        padding: 40px;
+        width: 100%;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}

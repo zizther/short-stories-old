@@ -1,0 +1,19 @@
+contentColumnType: text
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyExcerptWithFallback
+instructions: ''
+name: 'Story excerpt with fallback'
+searchable: true
+settings:
+  allowSelect: false
+  columnType: text
+  decimals: '0'
+  displayType: textinput
+  fieldTwig: '{{ element.storyExcerpt | length ? element.storyExcerpt : element.storyContent|storyExcerpt }}'
+  parseBeforeSave: false
+  parseOnMove: false
+  showField: false
+  textareaRows: '5'
+translationKeyFormat: null
+translationMethod: none
+type: aelvan\preparsefield\fields\PreparseFieldType

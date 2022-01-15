@@ -1,0 +1,62 @@
+{% set isHome = firstSegment == '' ? true : false %}
+
+<nav class="mobile-nav">
+    {% include "_layouts/_nav" %}
+</nav><!-- / .mobile-nav -->
+
+<header class="mn-hdr{% if isHome %} mn-hdr--home{% endif %}">
+    <div class="mn-hdr-inner">
+        <a class="pull-left logo" href="{{ siteUrl }}" title="{{ siteName }} - {{ global.siteSlogan }}">
+            <svg viewBox="0 0 93.8 64.9" xmlns="http://www.w3.org/2000/svg" role="img">
+                <use xlink:href="#svg-logo"/>
+            </svg>
+        </a>
+
+        <nav class="pull-left mn-nav" aria-label="Primary">
+            {% include "_layouts/_nav" %}
+        </nav><!-- / .mn-hdr -->
+
+        <div class="mn-hdr-right pull-right">
+            <div class="mobile-nav-btn pull-right">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div><!-- / .mobile-nav-btn -->
+
+            {% if beta %}
+                {% if currentUser %}
+                    <div class="my-account-btn pull-left">
+                        <a href="{{ url('authors/' ~ currentUser.username) }}" title="My profile">
+    						<img class="hdr-profile-img image-circle" src="{{ profileImage.getUrl('memberSmall') }}" alt="My profile">
+    					</a>
+
+                        <div class="my-account-dd">
+    						{% include '_layouts/_account-nav' with {
+    							wrap: false,
+    							signOut: true
+    						} %}
+                        </div>
+                    </div>
+
+                    <a class="button button-black pull-left write-story-btn" href="{{ url('write') }}" title="Write a story"><i class="icon-edit"></i> <span class="write-story-btn-text">Write a story</span></a>
+                {% else %}
+                    {% if firstSegment != 'signup' %}<a class="button border-white signup-btn pull-left" href="{{ url('signup') }}" title="Signup">Signup</a>{% endif %}
+                    {% if firstSegment != 'login' %}<a class="button border-white login-btn pull-left" href="{{ url('login') }}" title="Login">Login</a>{% endif %}
+                {% endif %}
+            {% endif %}
+        </div><!-- / .mn-hdr-right -->
+    </div><!-- / .mn-hdr-inner -->
+
+    {% if isHome %}
+        <section class="center-vert-hori hero hero--home">
+            <div class="center-cont hero-cont container">
+                <h1>{{ siteName }}</h1>
+                <p>
+                    Read them on the bus, at breakfast time...
+                    <br>
+                    Wherever, whenever!
+                </p>
+            </div><!-- / .hero-cont -->
+        </section><!-- / .hero -->
+    {% endif %}
+</header><!-- / .mn-hdr -->

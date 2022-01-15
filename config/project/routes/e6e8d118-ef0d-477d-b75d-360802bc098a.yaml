@@ -1,0 +1,9 @@
+siteUid: null
+sortOrder: 3
+template: stories/time
+uriParts:
+  - stories/time/
+  -
+    - number
+    - \d+
+uriPattern: 'stories/time/<number:\d+>'

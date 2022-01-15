@@ -1,0 +1,49 @@
+{% extends "_layouts/_layout" %}
+
+{% set pageRequireLogin = true %}
+
+{% set title = 'Edit email' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+	{% import "_macros/_errors" as errors %}
+
+    <div class="container page-content">
+        {% include 'account/_sidebar' %}
+
+        <div class="account-content">
+            <h1>{{ title }}</h1>
+
+            {% if craft.app.request.getParam('success') %}
+                <div class="message message-info">
+                    <p>Your email has been updated.</p>
+                </div>
+            {% endif %}
+
+            <form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                {{ csrfInput() }}
+                <input type="hidden" name="action" value="users/saveUser">
+                <input type="hidden" name="redirect" value="account/email/?success=true">
+                <input type="hidden" name="userId" value="{{ currentUser.id }}">
+
+                <fieldset>
+                    <p>Fill in both fields below to change the email address associated with your account.</p>
+
+                    <label for="email">Email</label>
+                    <input id="email" class="form-element" type="text" name="email" value="{{ currentUser.email }}">
+                    {% if account is defined %}
+                        {{ errors.errorList(account.getErrors('email')) }}
+                    {% endif %}
+
+                    <label for="password">Current Password</label>
+                    <input id="currentPassword" class="form-element" name="password" type="password" autocomplete="off">
+                    {% if account is defined %}
+                        {{ errors.errorList(account.getErrors('currentPassword')) }}
+                    {% endif %}
+                </fieldset>
+
+                <button class="button" type="submit">Submit</button>
+            </form>
+        </div><!-- / .account-content -->
+    </div><!-- / .container -->
+{% endblock %}

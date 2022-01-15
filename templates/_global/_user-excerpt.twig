@@ -1,0 +1,19 @@
+{% import "_macros/_components" as components %}
+
+{% set userImage = user.memberProfile.one() ?? profileImages.defaultProfileImage.one() %}
+
+<div class="excerpt user-excerpt">
+	<a class="col-frm" href="{{ url('authors/' ~ user) }}" title="View {{ user.fullName }}">
+		<div class="user-excerpt-user">
+			<div class="image-halo image-halo--medium-small">
+				<img class="image-circle" src="{{ userImage.getUrl('memberMedium') }}" alt="{{ user.fullName }}">
+				{% include '_global/_image-halo' %}
+			</div>
+			<h2>{{ user.fullName }}</h2>
+			{{ components.verifiedBadge(user, 'Verified') }}
+		</div>
+
+		{% import "_macros/_author" as authorMacros %}
+		{{ authorMacros.authorStats(user, userStatus) }}
+	</a>
+</div><!-- / .user-excerpt -->

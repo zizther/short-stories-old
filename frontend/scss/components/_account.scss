@@ -1,0 +1,67 @@
+.account-sidebar {
+    margin-bottom: 30px;
+
+    @media #{$bp-medium} {
+        float: left;
+        margin-bottom: 0;
+        width: 30%;
+    }
+
+    .account-nav {
+        background: $grey-lighter;
+        padding: 20px;
+
+        a {
+            color: $grey-dark;
+            display: block;
+            font-size: 1.3rem;
+            margin: 5px 0;
+            padding: 6px 10px;
+            transition: all 150ms ease-out;
+
+            &:hover {
+                background: $grey-light;
+                color: $white;
+                text-decoration: none;
+            }
+            &.active {
+                background: $grey-medium;
+                color: $white;
+            }
+        }
+    }
+}
+.account-content {
+    @media #{$bp-medium} {
+        float: right;
+        width: 66%;
+    }
+
+    fieldset {
+        border-bottom: 1px solid $grey-light;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+    }
+    #bio {
+        height: 150px;
+        max-height: 300px;
+    }
+}
+
+// Form
+.account-form {
+	#user-photo {
+		margin-top: 10px;
+	}
+	.member-verified {
+		margin-bottom: 30px;
+
+		&__text {
+			font-size: 1.5rem;
+		}
+		.icon-verified {
+			@include size(20px);
+			top: 4px;
+		}
+	}
+}

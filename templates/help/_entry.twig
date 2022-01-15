@@ -1,0 +1,39 @@
+{% extends "_layouts/_layout" %}
+
+{% block content %}
+	{% cache %}
+        {% set helpCentre = craft.entries.id(2524).one() %}
+
+		<section class="container page-content main-content">
+            <ul class="breadcrumbs">
+                <li><a href="{{ helpCentre.url }}" title="{{ helpCentre.title }}">{{ helpCentre.title }}</a></li>
+                {% for crumb in entry.getAncestors().all() %}
+                    <li>{{ crumb.getLink() }}</li>
+                {% endfor %}
+                <li>{{ entry.title }}</li>
+            </ul>
+
+			<h1>{{ entry.title }}</h1>
+
+            {% if entry.level == 1 %}
+
+                <h2>{{ entry.helpSubtitle | rv }}</h2>
+
+                {% for child in entry.children().all() %}
+                    <a href="{{ child.url }}" title="{{ child.title }}">{{ child.title }}</a>
+                {% endfor %}
+
+            {% else %}
+
+                {% if entry.dateUpdated > entry.postDate %}
+                    <h3>Updated: {{ entry.dateUpdated | date('F d, Y') }}</h3>
+                {% endif %}
+
+                <article>
+                    {% include '_global/_general-content-matrix' %}
+                </article>
+
+            {% endif %}
+		</section>
+	{% endcache %}
+{% endblock %}

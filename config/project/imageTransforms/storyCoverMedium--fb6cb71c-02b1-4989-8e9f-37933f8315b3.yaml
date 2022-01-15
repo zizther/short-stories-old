@@ -1,0 +1,9 @@
+format: null
+handle: storyCoverMedium
+height: '600'
+interlace: none
+mode: crop
+name: 'Story cover medium'
+position: center-center
+quality: '82'
+width: '400'

@@ -1,0 +1,13 @@
+contentColumnType: integer(10)
+fieldGroup: f7ee3ad7-c671-4990-9572-cc9c2b4ac047
+handle: verifiedFollowersCount
+instructions: 'The number of followers a member needs to become verified'
+name: 'Verified followers count'
+searchable: '1'
+settings:
+  decimals: '0'
+  max: ''
+  min: '0'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

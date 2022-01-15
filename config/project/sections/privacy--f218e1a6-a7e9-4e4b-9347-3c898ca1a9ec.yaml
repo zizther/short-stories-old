@@ -1,0 +1,26 @@
+enableVersioning: true
+handle: privacy
+name: Privacy
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  8539cb22-f67d-4219-8f6e-da97f89e6196: # $SITE_NAME
+    enabledByDefault: true
+    hasUrls: true
+    template: privacy/_entry
+    uriFormat: 'privacy/{slug}'
+structure:
+  maxLevels: 2
+  uid: 4e94f147-5db5-4055-b4f0-00246acd4748
+type: structure

@@ -1,0 +1,90 @@
+{% extends "_layouts/_layout" %}
+
+{% if craft.app.request.segment(3) == '' %}
+    {% redirect "stories/categories" %}
+{% endif %}
+
+{% set title = category.title ~ ' stories' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+    {% paginate craft.entries({
+        section: 'stories',
+        relatedTo: category,
+        limit: 12,
+        with: [
+            'storyCategories'
+        ]
+    }) as entriesInfo, entries %}
+
+    <div class="container">
+        <div class="search-meta">
+            <div class="search-meta__info">
+                {# Breadcrumbs #}
+                {% if category.level != 1 %}
+                    <div class="small-title search-result-title breadcrumb">
+                        <ol class="--plain">
+                            {% for cat in category.ancestors.all() %}
+                                <li><a class="search-result-item" href="{{ cat.url }}" title="Back to {{ cat.title }} stories">{{ cat.title }}</a></li>
+                                <li class="breadcrumb__arrow">></li>
+                            {% endfor %}
+
+                            <li><a class="search-result-item" href="{{ category.url }}" title="Back to {{ category.title }} stories">{{ category.title }}</a></li>
+                        </ol>
+                    </div>
+                {% endif %}
+
+                <h1>{{ category.title }}</h1>
+
+                {% if category.categoryDescription %}
+                    <div class="para-large">
+                        {{ category.categoryDescription | rv }}
+                    </div>
+                {% endif %}
+
+                {# Loop through the subcategories #}
+                {% set subCats = craft.categories({
+                        groupId: 2,
+                        descendantOf: category,
+                        descendantDist: 1,
+                        orderBy: 'title'
+                    }).all %}
+
+                {% if subCats | length %}
+                    <div class="small-title search-result-title breadcrumb category__subcats">
+                        <ol class="--plain">
+                            {% for subCategory in subCats %}
+
+                                {# check if this subcategory has at least one entry assigned to it #}
+                                {% set subCatEntries = craft.entries({
+                                    section: 'stories',
+                                    relatedTo: subCategory,
+                                    limit: 1
+                                }) %}
+
+                                {# display a link to the subcategory page if entries are assigned to it #}
+                                {% if subCatEntries | length %}
+                                    <li><a class="search-result-item" href="{{ subCategory.url }}" title="Stories on {{ subCategory.title }}">{{ subCategory.title }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endif %}
+            </div><!-- / .search-meta__info -->
+        </div><!-- / .search-meta -->
+
+		{% include '_global/_pagination' with {
+			position: 'top',
+			entriesInfo: entriesInfo
+		} %}
+
+        <div class="grid">
+            {% include '_global/_story-excerpt' with { stories: entries } %}
+        </div>
+
+		{% include '_global/_pagination' with {
+			position: 'bottom',
+			entriesInfo: entriesInfo
+		} %}
+    </div>
+{% endblock %}

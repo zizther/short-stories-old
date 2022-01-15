@@ -1,0 +1,11 @@
+contentColumnType: boolean
+fieldGroup: c6a8cf07-e8f1-48db-a89c-b02f0a7a1c91
+handle: memberVerificationRejected
+instructions: 'Has the users last attempt to be verified been rejected?'
+name: 'Verification rejected'
+searchable: '1'
+settings:
+  default: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

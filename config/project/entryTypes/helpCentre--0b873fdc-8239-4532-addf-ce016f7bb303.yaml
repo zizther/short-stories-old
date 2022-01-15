@@ -1,0 +1,21 @@
+fieldLayouts:
+  e78484c5-d2e2-4bfc-ab72-436e92f8a82b:
+    tabs:
+      -
+        elements:
+          -
+            instructions: null
+            label: Title
+            type: craft\fieldlayoutelements\EntryTitleField
+          -
+            fieldUid: 14785631-d179-4216-9a1c-18a4511f7351
+            required: true
+            type: craft\fieldlayoutelements\CustomField
+        name: Content
+        sortOrder: 1
+handle: helpCentre
+hasTitleField: true
+name: 'Help Centre'
+section: cfeb647a-b88e-411f-8ceb-24431e04cd37 # Help Centre
+sortOrder: 1
+titleFormat: '{section.name|raw}'

@@ -1,0 +1,14 @@
+contentColumnType: string
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyCategories
+instructions: ''
+name: 'Story categories'
+searchable: '1'
+settings:
+  branchLimit: ''
+  localizeRelations: false
+  selectionLabel: ''
+  source: 'group:6c8009a9-7ec8-49d0-9a05-57564d9f5997'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Categories

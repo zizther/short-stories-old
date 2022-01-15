@@ -1,0 +1,7 @@
+handle: members
+name: Members
+permissions:
+  - 'createentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'publishentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'deleteentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'editentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories

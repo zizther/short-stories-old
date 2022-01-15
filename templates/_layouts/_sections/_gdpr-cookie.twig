@@ -1,0 +1,7 @@
+{% if not getCookie('_gdpr_cookie') %}
+    {{ setCookie('_gdpr_cookie', '1', now | date_modify("+1 year").timestamp) }}
+    <div class="cookie-frame">
+        {{ messages.cookieMessage | rv }}
+        <div class="cookie-continue">Got it</div>
+    </div>
+{% endif %}

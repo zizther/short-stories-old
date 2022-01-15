@@ -1,0 +1,66 @@
+{% extends "_layouts/_layout" %}
+
+{% set title = "Filter stories" %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+    {# Get filter params #}
+    {% set filterCat = craft.app.request.getParam('category') %}
+    {% set filterTime = craft.app.request.getParam('time') %}
+
+    {# Test to see if category was added, if so, then get the ID #}
+    {% set categoryId = '' %}
+
+    {% if filterCat %}
+        {% set category = craft.categories.slug(filterCat).one() %}
+        {% set categoryId = category ? category.id : '' %}
+    {% endif %}
+
+    {# Get time range #}
+    {% set timeRange = '' %}
+
+    {% if filterTime >= 0 %}
+        {% set timeRange = filterTime | readTimeSearch %}
+    {% endif %}
+
+    <div class="container">
+
+        <div class="search-meta">
+            <div class="search-meta__info">
+                <h1>{{ title }}</h1>
+
+                <div class="para-large">
+                    <div class="small-title search-result-title">
+                        Results for
+                        {% if filterCat and category %}<span class="search-result-item">{{ filterCat }}</span>{% endif %}
+                        {% if filterTime >= '0' %}<span class="search-result-item">{{ filterTime }} min{% if filterTime != 1 %}s{% endif %}</span>{% endif %}
+                    </div>
+                </div>
+            </div><!-- / .search-meta__info -->
+        </div><!-- / .search-meta -->
+
+		{% paginate craft.entries({
+			section: 'stories',
+			relatedTo: categoryId,
+			storyReadTimeSearch: timeRange,
+			limit: 12,
+			with: [
+			    ['storyCategories']
+			]
+		}) as entriesInfo, entries %}
+
+		{% include '_global/_pagination' with {
+			position: 'top',
+			entriesInfo: entriesInfo
+		} %}
+
+		<div class="grid">
+            {% include '_global/_story-excerpt' with { stories: entries } %}
+        </div>
+
+		{% include '_global/_pagination' with {
+			position: 'bottom',
+			entriesInfo: entriesInfo
+		} %}
+    </div>
+{% endblock %}

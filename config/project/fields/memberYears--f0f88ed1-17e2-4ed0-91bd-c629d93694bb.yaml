@@ -1,0 +1,17 @@
+contentColumnType: text
+fieldGroup: c6a8cf07-e8f1-48db-a89c-b02f0a7a1c91
+handle: memberYears
+instructions: "Only use if the author is dead\r\nDon't use any spaces between the dashes. E.G. 1923-1996"
+name: Years
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

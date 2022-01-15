@@ -1,0 +1,30 @@
+{% macro authorStats(user, userStatus) %}
+
+{% endmacro %}
+
+{% macro authorVerifyMessage(user) %}
+	{% import "_macros/_components" as componentsMacros %}
+
+	{# Test if user has submitted for verification or has been rejected #}
+	{% if not user.memberRequestedVerification and not user.memberVerificationRejected %}
+		{# Get follower count to see if member is allowed to verify account #}
+
+        {#
+		{% set followers = craft.follow.getFollowers(user.id) %}
+		{% set followersCount = followers | length %}
+
+		{% if followersCount >= verificationBadge.verifiedFollowersCount and not user.memberVerified %}
+			{{ componentsMacros.message('info', 'message--spacing-top', verificationBadge.verificationBadgeEligibleCta) }}
+		{% endif %}
+        #}
+	{% endif %}
+
+	{% if currentUser.memberRequestedVerification and not currentUser.memberVerified %}
+		{{ componentsMacros.message('info', 'message--spacing-top', verificationBadge.verificationBadgeRequested) }}
+	{% endif %}
+
+	{% if currentUser.memberVerificationRejected or (currentUser.memberVerificationRejected and currentUser.memberVerified) %}
+		{# Member has been rejected #}
+		{{ componentsMacros.message('error', 'message--spacing-top', verificationBadge.verificationBadgeRejected) }}
+	{% endif %}
+{% endmacro %}

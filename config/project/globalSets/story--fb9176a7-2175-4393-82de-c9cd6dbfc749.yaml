@@ -1,0 +1,13 @@
+fieldLayouts:
+  882b7b9a-71b5-446f-aa99-8cacad01f9f1:
+    tabs:
+      -
+        fields:
+          ef222cc3-e725-42e7-ae50-256ca40cc5e9:
+            required: '1'
+            sortOrder: '1'
+        name: Content
+        sortOrder: '1'
+handle: story
+name: Story
+sortOrder: 6

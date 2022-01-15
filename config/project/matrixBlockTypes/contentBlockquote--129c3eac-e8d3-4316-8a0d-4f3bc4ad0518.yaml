@@ -1,0 +1,76 @@
+field: 712bd1a5-485d-4df4-931c-335b9691181b
+fieldLayouts:
+  fcd79a84-30ef-40dd-a978-65d1754b7553:
+    tabs:
+      -
+        fields:
+          8b259fbf-83a8-4805-af24-be40e3dc59da:
+            required: false
+            sortOrder: 2
+          6217c6bc-c23a-46c2-977c-3acae5cd0e94:
+            required: true
+            sortOrder: 1
+          439628ed-03cf-4024-a5e8-75fb2d6e5a1a:
+            required: false
+            sortOrder: 3
+        name: Content
+        sortOrder: 1
+fields:
+  8b259fbf-83a8-4805-af24-be40e3dc59da:
+    contentColumnType: text
+    fieldGroup: null
+    handle: contentCite
+    instructions: ''
+    name: Cite
+    searchable: true
+    settings:
+      charLimit: ''
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  6217c6bc-c23a-46c2-977c-3acae5cd0e94:
+    contentColumnType: text
+    fieldGroup: null
+    handle: contentBlockquote
+    instructions: ''
+    name: Quote
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      cleanupHtml: true
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Simple.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  439628ed-03cf-4024-a5e8-75fb2d6e5a1a:
+    contentColumnType: text
+    fieldGroup: null
+    handle: contentCiteUrl
+    instructions: ''
+    name: 'Cite URL'
+    searchable: true
+    settings:
+      charLimit: ''
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: contentBlockquote
+name: Blockquote
+sortOrder: 3

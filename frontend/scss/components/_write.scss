@@ -1,0 +1,43 @@
+/*** Write instructions form ***/
+#member-write-instructions-form {
+    display: none;
+}
+
+/*** Write story form ***/
+.write-story {
+    .story-status-badge  {
+        @include absolute(top 0 right 0);
+    }
+
+    .story-content {
+        padding-top: 10px;
+    }
+
+    h1 {
+        &::before {
+            @include absolute(top 0 left 0);
+            color: #ccc;
+            content: 'Title';
+            display: block;
+            z-index: -1;
+        }
+        &.remove-placeholder {
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+.write-load {
+    #write-story-title {
+        opacity: 0;
+        transition: opacity .1s ease-out;
+    }
+
+    &.--loaded {
+        #write-story-title {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+}

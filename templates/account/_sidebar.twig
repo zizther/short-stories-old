@@ -1,0 +1,15 @@
+<div class="account-sidebar">
+    <nav class="account-nav">
+        <a {% if seg2 == '' %}class="active"{% endif %} href="{{ url('account') }}" title="Account">Account</a>
+		<a {% if seg2 == 'verify' %}class="active"{% endif %} href="{{ url('account/verify') }}" title="Verify account">Verify account</a>
+        <a {% if seg2 == 'email' %}class="active"{% endif %} href="{{ url('account/email') }}" title="Email">Email</a>
+        <a {% if seg2 == 'password' %}class="active"{% endif %} href="{{ url('account/password') }}" title="Password">Password</a>
+		<hr>
+		<a href="{{ url('authors/' ~ currentUser.username) }}" title="My profile">My profile</a>
+		<a href="{{ url('account/following') }}" title="Following">Following</a>
+		<a href="{{ url('account/bookmarks') }}" title="My bookmarks">My bookmarks</a>
+		<a href="{{ url('write') }}" title="Write a story">Write a story</a>
+		<hr>
+		<a href="{{ url('logout') }}" title="Sign out">Sign out</a>
+    </nav>
+</div>

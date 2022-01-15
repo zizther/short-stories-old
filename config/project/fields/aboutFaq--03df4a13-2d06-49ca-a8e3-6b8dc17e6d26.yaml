@@ -1,0 +1,13 @@
+contentColumnType: string
+fieldGroup: e0e3e602-fa79-4da3-8b5c-6399c211a7ed
+handle: aboutFaq
+instructions: ''
+name: 'About FAQ'
+searchable: '1'
+settings:
+  contentTable: '{{%matrixcontent_aboutfaq}}'
+  localizeBlocks: false
+  maxBlocks: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Matrix

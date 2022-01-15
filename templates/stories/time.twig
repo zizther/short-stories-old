@@ -1,0 +1,55 @@
+{% extends "_layouts/_layout" %}
+
+{% if craft.app.request.getSegment(3) == '' %}
+    {% redirect "stories" %}
+{% endif %}
+
+{% set time = craft.app.request.getSegment(3) %}
+{% set readTimeSearch = time | readTimeSearch %}
+{% set timeReadable = time < 1 ? '< 1' : time %}
+{% set minMultiple = time >= 2 ? 'minutes' : 'minute' %}
+
+{% set title = "Stories around " ~ timeReadable ~ " " ~ minMultiple %}
+{% set description = "Discover a collection of stories which are around " ~ timeReadable ~ " " ~ minMultiple ~ " read time." %}
+
+{% do seomatic.meta.setAttributes({
+    "seoTitle": title,
+    "seoDescription": description
+}) %}
+
+{% block content %}
+	{% paginate craft.entries({
+		section: 'stories',
+		storyReadTimeSearch: readTimeSearch,
+		limit: 12,
+		with: [
+			['storyCategories']
+		]
+	}) as entriesInfo, entries  %}
+
+    <div class="container">
+        <div class="search-meta">
+            <div class="search-meta__info">
+                <h1>{{ timeReadable }} min read stories</h1>
+
+                <div class="para-large">
+                    <p>{{ description }}</p>
+                </div>
+            </div><!-- / .search-meta__info -->
+        </div><!-- / .search-meta -->
+
+		{% include '_global/_pagination' with {
+			position: 'top',
+			entriesInfo: entriesInfo
+		} %}
+
+        <div class="grid">
+            {% include '_global/_story-excerpt' with { stories: entries } %}
+        </div>
+
+		{% include '_global/_pagination' with {
+			position: 'bottom',
+			entriesInfo: entriesInfo
+		} %}
+    </div>
+{% endblock %}

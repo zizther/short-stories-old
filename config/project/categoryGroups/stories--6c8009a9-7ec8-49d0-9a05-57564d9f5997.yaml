@@ -1,0 +1,20 @@
+fieldLayouts:
+  d9511062-ac3b-410a-a198-9ea31675b9a2:
+    tabs:
+      -
+        fields:
+          2b476d36-9984-4652-b373-8233ccda556b:
+            required: '0'
+            sortOrder: '1'
+        name: SEO
+        sortOrder: '1'
+handle: stories
+name: Stories
+siteSettings:
+  8539cb22-f67d-4219-8f6e-da97f89e6196: # $SITE_NAME
+    hasUrls: '1'
+    template: stories/category
+    uriFormat: '{% if object.level == 1 %}stories/category/{slug}{% else %}{parent.uri}/{slug}{% endif %}'
+structure:
+  maxLevels: null
+  uid: dbfd1ad6-e81a-455d-ab0f-f8d98e59ad43

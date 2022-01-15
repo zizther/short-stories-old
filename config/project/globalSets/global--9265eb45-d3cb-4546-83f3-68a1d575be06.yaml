@@ -1,0 +1,13 @@
+fieldLayouts:
+  ba2ba32f-d510-4439-b53b-f5d698116bc9:
+    tabs:
+      -
+        fields:
+          bfae6ee8-6cc5-49d4-932a-deb96d8417ca:
+            required: false
+            sortOrder: 1
+        name: Content
+        sortOrder: 1
+handle: global
+name: Global
+sortOrder: 2

@@ -1,0 +1,9 @@
+.spacing {
+    &--minus-ftr {
+        margin-bottom: -$footer-margin-top-small;
+
+        @media #{$bp-medium} {
+            margin-bottom: -$footer-margin-top-medium;
+        }
+    }
+}

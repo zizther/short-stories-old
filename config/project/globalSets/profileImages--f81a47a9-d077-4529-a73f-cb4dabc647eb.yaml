@@ -1,0 +1,13 @@
+fieldLayouts:
+  86c6480b-66e9-4aea-92f8-7a0f42ae39d1:
+    tabs:
+      -
+        fields:
+          60e5d63e-6d91-41fe-aef8-34a2edc05188:
+            required: '1'
+            sortOrder: '1'
+        name: Content
+        sortOrder: '1'
+handle: profileImages
+name: 'Profile images'
+sortOrder: 5

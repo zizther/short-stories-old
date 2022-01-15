@@ -1,0 +1,40 @@
+{% extends "_layouts/_layout" %}
+
+{# If already logged in, then go to account page #}
+{% if currentUser %}
+	{% redirect "account" %}
+{% endif %}
+
+{% set title = 'Login' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+
+	<div class="member-activation-content">
+		<h2>{{ title }}</h2>
+
+		<form method="post" accept-charset="UTF-8">
+		    {{ csrfInput() }}
+		    <input type="hidden" name="action" value="users/login">
+
+		    <input id="loginName" class="form-element" type="text" name="loginName" placeholder="Username or email" value="{{ craft.app.user.rememberedUsername }}">
+
+		    <input id="password" class="form-element" type="password" name="password" placeholder="Password">
+
+			<div class="clearfix">
+			    <label class="pull-left remember-me">
+			        <input type="checkbox" name="rememberMe" value="1">
+			        Remember me
+			    </label>
+
+			    <button class="button pull-right" type="submit">Login</button>
+			</div>
+
+		    {% if errorMessage is defined %}
+		        <div class="message message-small message-error"><p>{{ errorMessage }}</p></div>
+		    {% endif %}
+		</form>
+
+		<p><a href="{{ url('login/forgot-password') }}">Forget your password?</a></p>
+	</div><!-- / .member-activation-content -->
+{% endblock %}

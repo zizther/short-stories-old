@@ -1,0 +1,118 @@
+.author-container {
+    background: url('../graphics/author-bg.png') no-repeat center -34px;
+    padding-top: 80px;
+}
+
+/*** Author stats ***/
+.author-stats {
+    .author-stats-box {
+        color: $grey-medium;
+		display: inline-block;
+        font-weight: 800;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+
+        .num {
+			color: $grey-dark;
+            font-weight: 400;
+            margin-bottom: 2px;
+		}
+    }
+}
+
+.author-deets {
+    border-bottom: 1px solid $grey-lightest;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+
+	h1 {
+		font-size: 2.5rem;
+		color: $grey-dark;
+        margin-bottom: 17px;
+
+        @media #{$bp-medium} {
+            font-size: 3rem;
+        }
+
+		.icon-verified {
+			@include size(14px);
+		}
+	}
+    .author-bio {
+        max-width: 470px;
+        margin: 0 auto 20px;
+
+        p {
+            color: $grey-medium;
+            margin-bottom: 0;
+        }
+    }
+    .author-links {
+        margin-top: 15px;
+
+        .link {
+            color: $grey-medium;
+            display: inline-block;
+            font-size: 1.8rem;
+            margin: 0 5px;
+            padding: 2px 5px;
+            transition: color .15s ease-out;
+
+            &:hover {
+                color: $grey-dark;
+                text-decoration: none;
+            }
+
+			&--website {
+				&::before {
+					color: $worldBlue;
+				}
+			}
+
+			&--twitter {
+				&::before {
+					color: $twitterBlue;
+				}
+			}
+			&--facebook {
+				&::before {
+					color: $facebookBlue;
+				}
+			}
+
+			span {
+				font-size: 1.3rem;
+			}
+        }
+    }
+    .follow-button {
+        margin-top: 20px;
+    }
+	.author-stats {
+        margin: 30px auto 0;
+        max-width: 500px;
+		text-align: center;
+
+        @media #{$bp-medium} {
+            margin-top: 40px;
+        }
+
+        .author-stats-box {
+			margin: 0 10px;
+
+            @media #{$bp-medium} {
+                margin: 0 20px;
+            }
+        }
+		.num {
+            font-size: 2rem;
+		}
+	}
+}
+
+.no-stories-yet {
+    font-size: 2rem;
+    margin: 30px 0;
+    text-align: center;
+}

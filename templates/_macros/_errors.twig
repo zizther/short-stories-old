@@ -1,0 +1,9 @@
+{% macro errorList(errors) %}
+    {% if errors %}
+        <div class="message message-small message-error">
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,17 @@
+contentColumnType: string
+fieldGroup: 8719b8a3-0ff5-4cd0-b3b1-cf97af93c2a7
+handle: footerNav
+instructions: ''
+name: 'Footer nav'
+searchable: true
+settings:
+  limit: '5'
+  localizeRelations: false
+  selectionLabel: ''
+  source: null
+  sources: '*'
+  targetSiteId: null
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

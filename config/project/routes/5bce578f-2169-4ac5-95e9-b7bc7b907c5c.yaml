@@ -1,0 +1,7 @@
+siteUid: null
+sortOrder: 7
+template: account/following
+uriParts:
+  - account
+  - /following
+uriPattern: account/following

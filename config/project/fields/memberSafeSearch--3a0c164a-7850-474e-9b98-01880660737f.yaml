@@ -1,0 +1,11 @@
+contentColumnType: boolean
+fieldGroup: c6a8cf07-e8f1-48db-a89c-b02f0a7a1c91
+handle: memberSafeSearch
+instructions: 'Whether or not the site search functionality should exclude stories with bad words'
+name: 'Safe search'
+searchable: true
+settings:
+  default: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

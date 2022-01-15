@@ -1,0 +1,13 @@
+{% macro message(type, classes, text) %}
+	<div class="message message-{{type}}{% if classes %} {{ classes }}{% endif %}">
+		<div class="message-content">{{ text | rv }}</div>
+	</div>
+{% endmacro %}
+
+{% macro verifiedBadge(user, text) %}
+	{% import '_macros/_icons' as iconMacros %}
+
+  	{% if not user.memberVerificationRejected and user.memberVerified %}
+		{{ iconMacros.verified(text) }}
+	{% endif %}
+{% endmacro %}

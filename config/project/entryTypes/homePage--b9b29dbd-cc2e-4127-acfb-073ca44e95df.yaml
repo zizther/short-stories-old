@@ -1,0 +1,7 @@
+handle: homePage
+hasTitleField: true
+name: 'Home page'
+section: 3cdb34ca-4584-4d98-bb74-6c962b982560 # Home page
+sortOrder: 1
+titleFormat: '{section.name|raw}'
+titleLabel: Title

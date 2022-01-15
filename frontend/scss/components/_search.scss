@@ -1,0 +1,33 @@
+.search-box {
+	@include fixed(top 0 left 0);
+	@include size(100%);
+	background: rgba(255, 255, 255, .9);
+	display: none;
+	padding: 20px;
+	z-index: 1000;
+
+	@media #{$bp-medium} {
+		padding: 40px;
+	}
+
+	&__close {
+		@include absolute(top 20px right 20px);
+		cursor: pointer;
+		font-size: 2rem;
+	}
+	form {
+		margin-top: 50px;
+
+		input {
+			background: transparent;
+			border-bottom: 1px solid $grey-light;
+			font-size: 2.2rem;
+			padding: 10px;
+			width: 100%;
+
+            @media #{$bp-medium} {
+                font-size: 4rem;
+            }
+		}
+	}
+}

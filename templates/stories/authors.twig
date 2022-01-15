@@ -1,0 +1,84 @@
+<html>
+<head>
+	<title>Authors content test</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			margin: 30px;
+		}
+
+		a {
+			color: red;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+
+		table {
+			border-left: 1px solid black;
+			border-top: 1px solid black;
+			border-spacing: 0;
+			width: 100%;
+		}
+
+		thead {
+			font-weight: 700;
+		}
+		thead td {
+			background: #ddd;
+			padding: 10px 5px;
+		}
+
+		td {
+			border-bottom: 1px solid black;
+			border-right: 1px solid black;
+			padding: 5px;
+		}
+
+		tbody tr:hover td {
+			background: #eee;
+		}
+		tbody tr.done td {
+			background: #badc58;
+		}
+	</style>
+</head>
+<body>
+	{% set authors = craft.users.group('members').limit(500) %}
+	{% set index = 0 %}
+
+	<table>
+		<thead>
+			<tr>
+				<td>Index</td>
+				<td>Username</td>
+				<td>Name</td>
+				<td>Years</td>
+				<td>Profile Image</td>
+				<td>Bio</td>
+				<td>Website</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for author in authors %}
+				{% set index = index + 1 %}
+
+				<tr{% if author.memberUpdated %} class="done"{% endif %}>
+					<td>{{ index }}</td>
+					<td>{{ author.username }}</td>
+					<td>{{ author.fullName }}</td>
+					<td>{{ author.memberYears }}</td>
+					<td>{{ author.memberProfile.one() ? 'Yes' : 'No' }}</td>
+					<td>{{ author.memberBio ? 'Yes' : 'No' }}</td>
+					<td>{% if author.memberWebsiteUrl %}<a href="{{ author.memberWebsiteUrl }}" target="_blank">Link</a>{% else %}No{% endif %}</td>
+				<tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

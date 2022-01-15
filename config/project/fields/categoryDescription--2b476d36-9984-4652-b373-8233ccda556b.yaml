@@ -1,0 +1,15 @@
+contentColumnType: text
+fieldGroup: cce2e5cf-e9a2-4c80-9429-50be3e4e4a33
+handle: categoryDescription
+instructions: ''
+name: 'Category description'
+searchable: '1'
+settings:
+  charLimit: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

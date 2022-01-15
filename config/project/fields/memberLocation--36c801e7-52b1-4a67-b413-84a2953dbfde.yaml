@@ -1,0 +1,15 @@
+contentColumnType: text
+fieldGroup: c6a8cf07-e8f1-48db-a89c-b02f0a7a1c91
+handle: memberLocation
+instructions: ''
+name: Location
+searchable: '1'
+settings:
+  charLimit: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

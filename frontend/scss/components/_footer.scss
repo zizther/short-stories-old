@@ -1,0 +1,60 @@
+.mn-ftr {
+    @include clearfix;
+    background: $grey-lightest;
+    color: $grey-medium;
+    margin-top: $footer-margin-top-small;
+    padding: 35px 20px;
+
+    @media #{$bp-medium} {
+        margin-top: $footer-margin-top-medium;
+        padding: 50px 30px;
+    }
+}
+.ftr-logo {
+    @include size(50px, 35px);
+    display: block;
+    margin: 0 auto;
+
+    @media #{$bp-medium} {
+        float: left;
+        margin-right: 25px;
+    }
+
+    svg {
+        fill: $grey-medium;
+    }
+}
+.ftr-nav {
+    margin: 32px 0 30px;
+    line-height: 1;
+    text-align: center;
+
+    @media #{$bp-medium} {
+        float: left;
+        line-height: 35px;
+        margin: 0;
+        text-align: left;
+    }
+
+    a {
+        color: inherit;
+        font-size: 1rem;
+        font-weight: 900;
+        margin-right: 15px;
+        text-transform: uppercase;
+    }
+}
+.ftr-copyright {
+    font-size: 1.1rem;
+    line-height: 1;
+    text-align: center;
+
+    @media #{$bp-medium} {
+        float: right;
+        line-height: 35px;
+        text-align: left;
+    }
+}
+.ftr-cr-spc {
+    padding: 0 5px;
+}

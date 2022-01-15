@@ -1,0 +1,126 @@
+{%- spaceless -%}
+
+    {% set env = craft.app.config.general.custom.craftEnv %}
+    {% set production = craft.app.config.general.custom.production %}
+    {% set beta = craft.app.config.general.custom.beta %}
+    {% set isPreview = craft.app.request.isPreview %}
+
+    {% set firstSegment = craft.app.request.segments|first %}
+    {% set seg2 = craft.app.request.getSegment(2) %}
+    {% set seg3 = craft.app.request.getSegment(3) %}
+    {% set lastSegment = craft.app.request.segments|last %}
+
+    {# Check if user is logged in for certain templates #}
+    {% if pageRequireLogin is defined and pageRequireLogin %}
+        {% if not currentUser %}
+            {% requireLogin %}
+        {% endif %}
+    {% endif %}
+
+	{# Redirect user to unsupported page if they are using IE10 or below #}
+	{% if craft.agent.isBrowser('ie 10 >') %}
+		{% redirect 'unsupported' %}
+	{% endif %}
+
+	{% set showWriteInstructions = false %}
+    {% set userStatus = 'live' %}
+
+	{% if currentUser %}
+	    {% set profileImage = currentUser.memberProfile.one() ?? profileImages.defaultProfileImage.one() %}
+
+	    {% if firstSegment == 'write' and not currentUser.memberShowWriteInstructions %}
+	        {% set showWriteInstructions = true %}
+	    {% endif %}
+	{% else %}
+		{% set profileImage = profileImages.defaultProfileImage.one() %}
+	{% endif %}
+
+{%- endspaceless -%}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=5">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/device-icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="/assets/device-icons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/assets/device-icons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/assets/device-icons/manifest.json">
+	<link rel="mask-icon" href="/assets/device-icons/safari-pinned-tab.svg" color="#ffffff">
+	<link rel="shortcut icon" href="/assets/device-icons/favicon.ico">
+	<meta name="msapplication-config" content="/assets/device-icons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+
+{% if firstSegment == '' %}
+	<meta name="apple-mobile-web-app-title" content="{{ siteName }}">
+	<meta name="application-name" content="{{ siteName }}">
+{% endif %}
+
+{% if storyTemplate is defined and storyTemplate %}
+	<meta name="article:article:author" value="{{ storyAuthorUrl }}">
+	<meta name="article:section" value="{{ storyCats }}">
+    <meta name="twitter:label1" value="Reading time">
+    <meta name="twitter:data1" value="{{ storyReadTime }}">
+{% endif %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<script>
+		var docElement = document.documentElement;
+		docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') + ' js ';
+	</script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link href="{{ rev('styles.css') }}" rel="stylesheet">
+
+    {% include '_global/_ga' %}
+</head>
+<body>
+    <div class="no-js-container">
+        <div class="no-js-message">This site requires JavaScript to be enabled to work properly. Please check your settings and try again.</div>
+    </div>
+
+    {% include '_global/_svg' %}
+    {% include '_layouts/_header' %}
+
+	{% block content %}
+		<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}...{% endblock %}{% endverbatim %}</code> yet.</p>
+		<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+	{% endblock %}
+
+    {% include '_layouts/_footer' %}
+
+    {% include '_layouts/_sections/_search' %}
+    {% include '_layouts/_sections/_write-instructions' %}
+    {% include '_layouts/_sections/_gdpr-cookie' %}
+
+	<script>
+		window.csrfTokenName = "{{ craft.app.config.general.csrfTokenName|e('js') }}";
+		window.csrfTokenValue = "{{ craft.app.request.csrfToken|e('js') }}";
+
+		var production = {{ production ? 1 : 0 }};
+		{%- if firstSegment == 'write' %}var showWriteInstructions = {{ showWriteInstructions ? 1 : 0 }};{% endif -%}
+	</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script src="{{rev('main.min.js') }}"></script>
+
+	{% if firstSegment == 'write' and currentUser %}
+        <script src="https://cdn.jsdelivr.net/combine/npm/@editorjs/editorjs@2,npm/@editorjs/header@2,npm/@editorjs/quote@2,npm/@editorjs/delimiter@1"></script>
+		<script src="{{ rev('write.min.js') }}"></script>
+		<script>
+			config.storyExcerptCount = {{ craft.app.fields.getFieldByHandle('storyExcerpt').settings.charLimit }};
+		</script>
+	{% endif %}
+    {% if firstSegment == 'account' %}
+        <script>
+            config.memberBioCount = {{ craft.app.fields.getFieldByHandle('memberBio').settings.charLimit }};
+        </script>
+    {% endif %}
+
+	{% if shareOnTemplate is defined and shareOnTemplate %}
+		<script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-524afe1606ac825a"></script>
+	{% endif %}
+</body></html>

@@ -1,0 +1,21 @@
+.category {
+    &-excerpt {
+        box-shadow: 0 1px 7px rgba(0, 0, 0, .07);
+        border-radius: 4px;
+    	text-align: center;
+
+    	h2 {
+    		color: $grey-dark;
+    		font-family: $font-main-serif;
+    		margin-bottom: 10px;
+    	}
+    	p {
+    		&:last-child {
+    			margin-bottom: 0;
+    		}
+    	}
+    }
+    &__subcats {
+        margin-top: 20px;
+    }
+}

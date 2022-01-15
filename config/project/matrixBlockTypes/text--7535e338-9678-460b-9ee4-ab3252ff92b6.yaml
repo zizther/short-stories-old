@@ -1,0 +1,35 @@
+field: fc742864-ee45-41b8-b5f1-652355c49075
+fieldLayouts:
+  0866f536-8a21-41c7-a3ab-f7f4938a3235:
+    tabs:
+      -
+        fields:
+          3ef28c77-d7e0-41e8-99b9-73cfbeb49050:
+            required: true
+            sortOrder: 1
+        name: Content
+        sortOrder: 1
+fields:
+  3ef28c77-d7e0-41e8-99b9-73cfbeb49050:
+    contentColumnType: text
+    fieldGroup: null
+    handle: text
+    instructions: ''
+    name: Text
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Simple.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: text
+name: Text
+sortOrder: 2

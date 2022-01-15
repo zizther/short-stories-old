@@ -1,0 +1,17 @@
+contentColumnType: text
+fieldGroup: 417a1dae-04bd-46ee-9632-3880c16a5a04
+handle: googleAnalyticsId
+instructions: ''
+name: 'Google analytics ID'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

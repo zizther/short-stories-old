@@ -1,0 +1,29 @@
+{% for block in entry.generalContent.all() %}
+    {% if block.type == 'heading' %}
+
+        <{{ block.headingSize }}>
+            {{ block.headingText | rv }}
+        </{{ block.headingSize }}>
+
+    {% elseif block.type == 'text' %}
+
+        {{ block.text | rv }}
+
+    {% elseif block.type == 'blockquote' %}
+
+        <blockquote{% if block.blockquoteCiteUrl %} cite="{{ block.blockquoteCiteUrl }}"{% endif %}>
+            {{ block.blockquoteText | rv }}
+
+            {% if block.blockquoteCite %}
+                <cite>
+                    {% if block.blockquoteCiteUrl %}
+                        <a href="{ block.blockquoteCiteUrl }}" target="_blank">{{ block.blockquoteCite }}</a>
+                    {% else %}
+                        {{ block.blockquoteCite }}
+                    {% endif %}
+                </cite>
+            {% endif %}
+        </blockquote>
+
+    {% endif %}
+{% endfor %}

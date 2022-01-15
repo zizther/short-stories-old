@@ -1,0 +1,35 @@
+{% extends "_layouts/_layout" %}
+
+{% do seomatic.meta.seoTitle('Stats') %}
+
+{% block content %}
+
+    <div class="container">
+        {% if currentUser %}
+            <div class="stat">
+                Total live stories = {{ craft.entries.section('stories').count() }}
+            </div>
+            <br><br>
+            <div class="stat">
+                Total members = {{ craft.users.groupId(1).count() }}
+            </div>
+            <br><br>
+            <div class="stat">
+                {% set totalWords = 0 %}
+
+                {% for entry in craft.entries({
+                    section: 'stories',
+                    limit: 2000
+                }).all() %}
+                    {% set totalWords = totalWords + entry.storyWordCount %}
+                {% endfor %}
+
+                Total words = {{ totalWords | number_format(0, '.', ',') }}
+            </div>
+        {% else %}
+            <h3>Access denied</h3>
+            <p>You need to login to access this page.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

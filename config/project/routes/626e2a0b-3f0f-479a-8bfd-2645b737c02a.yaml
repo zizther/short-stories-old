@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 9
+template: stats/index
+uriParts:
+  - stats
+uriPattern: stats

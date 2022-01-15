@@ -1,0 +1,24 @@
+handle: editor
+name: Editor
+permissions:
+  - accesscpwhensystemisoff
+  - accesscp
+  - registerusers
+  - moderateusers
+  - assignuserpermissions
+  - 'assignusergroup:62acf78f-ed53-4edd-bcb0-f7ed7cb3e118'
+  - assignusergroups
+  - administrateusers
+  - editusers
+  - 'createentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'publishentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'deleteentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'publishpeerentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'deletepeerentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'editpeerentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'publishpeerentrydrafts:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'deletepeerentrydrafts:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'editpeerentrydrafts:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'editentries:1dcb8fbd-f043-48c7-8c27-ee463cd47d0b' # Stories
+  - 'saveassetinvolume:36f8626b-79c9-4763-888b-84c693d8b72a'
+  - 'viewvolume:36f8626b-79c9-4763-888b-84c693d8b72a'

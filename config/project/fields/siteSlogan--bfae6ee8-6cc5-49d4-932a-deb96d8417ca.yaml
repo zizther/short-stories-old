@@ -1,0 +1,15 @@
+contentColumnType: text
+fieldGroup: f7ee3ad7-c671-4990-9572-cc9c2b4ac047
+handle: siteSlogan
+instructions: ''
+name: 'Site slogan'
+searchable: '1'
+settings:
+  charLimit: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

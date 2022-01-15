@@ -1,0 +1,16 @@
+contentColumnType: string
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyExcerpt
+instructions: ''
+name: 'Story excerpt'
+searchable: true
+settings:
+  charLimit: '180'
+  code: ''
+  columnType: string
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

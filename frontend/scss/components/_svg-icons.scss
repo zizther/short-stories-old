@@ -1,0 +1,20 @@
+.member-verified {
+	display: inline-block;
+	font-size: 1.2rem;
+
+	&__text {
+		display: inline-block;
+		white-space: nowrap;
+	}
+	.icon-verified {
+		@include size(14px);
+		display: inline-block;
+		position: relative;
+		top: 2px;
+	}
+	svg {
+		display: inline-block;
+		fill: $grey-medium;
+		pointer-events: none;
+	}
+}

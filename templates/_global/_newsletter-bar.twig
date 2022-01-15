@@ -1,0 +1,17 @@
+<div class="newsletter-bar">
+	<div class="container">
+		<div class="newsletter-bar__text">
+            {% if newsletter.newsletterTitle %}<h2>{{ newsletter.newsletterTitle | rv }}</h2>{% endif %}
+			{{ newsletter.newsletterText | rv }}
+		</div>
+
+		<form action="https://short-stories.us17.list-manage.com/subscribe/post?u=3f38479f7e88a8e3d6e351ff0&amp;id=fb1a420691" method="post" target="_blank">
+			<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="hidden" name="b_3f38479f7e88a8e3d6e351ff0_fb1a420691" tabindex="-1" value=""></div>
+
+			<div class="field-group">
+				<input class="required field-email" type="email" name="EMAIL" required tabindex="1" placeholder="Email Address">
+				<button class="button button-black" type="submit" tabindex="2">Subscribe</button>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+{% import "_macros/_components" as components %}
+
+<div class="story-author-slab --{{ position }}">
+	<a class="story-author-slab__profile image-halo image-halo--{{ position == 'top' ? 'small' : 'medium-small' }}" href="{{ storyAuthorUrl }}" title="View all stories by {{ authorName }}">
+		<img src="{{ storyAuthorProfile.getUrl('memberMedium') }}" alt="{{ authorName }}">
+		{#{% include '_global/_image-halo' %}#}
+	</a>
+
+	<div class="story-author-slab__meta">
+		<div>
+            {% if position == 'bottom' %}
+        		<div class="written-by">Written by</div>
+            {% endif %}
+
+			<a class="story-author-slab__meta-author" href="{{ storyAuthorUrl }}" title="View all stories by {{ authorName }}">
+				{{- authorName -}}
+			</a>
+			{{ components.verifiedBadge(user) }}
+
+            {% if beta %}
+    			{% if currentUser %}
+                    {% if not isCurrentAuthor %}
+                        <a class="button button-border-green button-mini follow-button" href="#">Follow</a>
+
+                        {#
+        				{% if craft.follow.isFollow(entry.author.id) %}
+        					<a class="button button-mini follow-button" href="{{ actionUrl('follow/stopFollowing', {id:entry.author.id}) }}">Unfollow</a>
+        				{% else %}
+        					<a class="button button-border-green button-mini follow-button" href="{{ actionUrl('follow/startFollowing', {id:entry.author.id}) }}">Follow</a>
+        				{% endif %}
+                        #}
+                    {% endif %}
+    			{% else %}
+    				<div class="button button-border-green button-mini disabled follow-button login-required">Follow</div>
+    			{% endif %}
+            {% endif %}
+		</div>
+
+        {% if position == 'top' %}
+    		<div>
+    			<a class="story-time" href="{{ url('stories/time/' ~ storyReadTimeValue) }}" title="Find stories around {{ storyReadTime }} long"><i class="icon-clock"></i> {{ entry.storyReadTimeMin }}</a>
+    		</div>
+        {% endif %}
+	</div>
+</div>

@@ -1,0 +1,23 @@
+contentColumnType: string
+fieldGroup: f7ee3ad7-c671-4990-9572-cc9c2b4ac047
+handle: defaultProfileImage
+instructions: ''
+name: 'Default profile image'
+searchable: '1'
+settings:
+  allowedKinds:
+    - image
+  defaultUploadLocationSource: 'volume:aa0f2401-1948-4b0f-ab81-482924555e3f'
+  defaultUploadLocationSubpath: ''
+  limit: '1'
+  localizeRelations: false
+  restrictFiles: '1'
+  selectionLabel: ''
+  singleUploadLocationSource: 'volume:36f8626b-79c9-4763-888b-84c693d8b72a'
+  singleUploadLocationSubpath: default
+  sources: '*'
+  useSingleFolder: '1'
+  viewMode: large
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Assets

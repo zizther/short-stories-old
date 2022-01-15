@@ -1,0 +1,13 @@
+{% macro verified(text) %}
+	<div class="member-verified" title="Verified">
+		<div class="icon-verified">
+			<svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
+				<g>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10 S17.52,2,12,2z M9.92,17.93l-4.95-4.95l2.05-2.05l2.9,2.9l7.35-7.35l2.05,2.05L9.92,17.93z"></path>
+		  		</g>
+		  	</svg>
+		</div>
+
+		{% if text %}<div class="member-verified__text">{{ text | rv }}</div>{% endif %}
+	</div>
+{% endmacro %}

@@ -1,0 +1,137 @@
+{% extends "_layouts/_layout" %}
+
+{% set pageRequireLogin = true %}
+
+{% import "_macros/_helpers" as helperMacros %}
+
+{% set title = 'Write a story' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+    {% set entryId = helperMacros.getStoryIdFromSlug() %}
+    {% set entry = craft.entries.id(entryId).status(['live', 'disabled']).one() %}
+
+    {# Define the entry status and URL #}
+    {% if entry is defined and entry %}
+
+        {# Check to see if the current user is the author of the story - if not show 404 #}
+        {% if entry.author.id != currentUser.id %}
+            {% redirect "404" %}
+        {% endif %}
+
+        {% set entryExists = true %}
+        {% set entryStatus = entry.status %}
+        {% set redirect = 'write/' ~ entry.id %}
+        {% set storyContent = entry.storyContent %}
+
+    {% else %}
+
+        {% set entryExists = false %}
+        {% set entryStatus = 'draft' %}
+        {% set redirect = 'write' %}
+        {% set storyContent = 'null' %}
+
+    {% endif %}
+
+    {% js %}
+        var saveStatus = '{{ entryStatus }}',
+            editorStory = {{ storyContent | raw }};
+    {% endjs %}
+
+    <header class="story-hdr">
+        <div class="inner">
+            <a class="scroll-top icon-arrow-up" href="#" title="Scroll to top"></a>
+
+            <div class="">
+                {{ entryStatus == 'draft' ? 'Draft' : 'Published' }}
+
+                <div class="button button-mini button-border-green save-story-button" data-status="live">
+                    {% if entryExists %}
+                        {{ entryStatus == 'live' ? 'Save changes' : 'Ready to publish?' }}
+                    {% else %}
+                        Ready to publish?
+                    {% endif %}
+                </div>
+
+                {% if entryExists %}
+                    <div class="button button-small write-delete-story" data-entry="{{ entry.id }}" data-redirect="/author/{{ seg2 }}"><i class="icon-delete"></i>D</div>
+                {% endif %}
+            </div><!-- / .story-actions -->
+        </div><!-- / .inner -->
+    </header><!-- / #story-hdr -->
+
+    <div class="container story-container">
+        <div class="write-load">
+            <div class="story-time"><i class="icon-clock"></i> <span class="calc-mins">{% if entryExists %}{{ entry.storyReadTime }}{% else %}0 mins{% endif %}</span></div>
+
+            <div class="write-story">
+                <div class="story-status-badge{% if entry is not defined %} hidden-el{% endif %}">
+                    <i class="icon-edit"></i>
+                    <span>{% if entryStatus == 'live' %}Live{% else %}Draft{% endif %}</span>
+                </div>
+
+                <form id="write-form" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                    {{ csrfInput() }}
+                    <input type="hidden" name="action" value="entries/saveEntry">
+                    <input type="hidden" name="redirect" value="{{ redirect }}">
+                    <input type="hidden" name="sectionId" value="4">
+                    <input type="hidden" name="enabled" value="{% if entryStatus == 'live' %}1{% else %}0{% endif %}">
+
+                    {%- if entryExists %}
+                    <input type="hidden" name="entryId" value="{{ entry.id }}">
+                    {% endif -%}
+
+                    <div style="display: none;">
+                        {# Grab all categories in the group and set variable. #}
+                        {% set categories = craft.categories.group('stories').all() %}
+
+                        {% if entryExists %}
+                            {# Grab the categories Ids that the user already selected #}
+                            {% set entryOptionIds = entry.storyCategories.limit(null).ids() %}
+                        {% endif %}
+
+                        {#
+                        <select class="form-element" name="fields[storyCategories][]" multiple>
+                            {% for category in categories %}
+                                 <option value="{{ category.id }}" {% if category.id in entryOptionIds %}selected{% endif %}>{{ category.title }}</option>
+                            {% endfor %}
+                        </select>
+                        #}
+
+                        {% if entryExists %}
+                            {% for category in categories %}
+                                <label class="checkbox-radio" for="{{ category.slug }}">
+                                    <input id="{{ category.slug }}" class="story-cat" type="checkbox" {% if category.id in entryOptionIds %}checked{% endif %} value="{{ category.id }}" name="fields[storyCategories][]">
+                                    <div class="checkbox-radio-label">{{ category.title }}</div>
+                                </label>
+                            {% endfor %}
+                        {% else %}
+                            {% for category in categories %}
+                                <label class="checkbox-radio" for="{{ category.slug }}">
+                                    <input id="{{ category.slug }}" class="story-cat" type="checkbox" value="{{ category.id }}" name="fields[storyCategories][]">
+                                    <div class="checkbox-radio-label">{{ category.title }}</div>
+                                </label>
+                            {% endfor %}
+                        {% endif %}
+
+                        <textarea id="write-story-excerpt" class="form-element" name="fields[storyExcerpt]" placeholder="Story Excerpt">{%- if entryExists %}{{ entry.storyExcerpt }}{% endif -%}</textarea>
+                        <!--
+                        <div id="counter"></div>
+                        -->
+
+                        <hr>
+                    </div>
+
+                    <h1 id="write-story-title" contenteditable="true" data-placeholder="Title">{% if entryExists %}{{ entry.title }}{% endif %}</h1>
+
+                    <article class="story-content">
+                        <!--
+                        <textarea id="write-story-text" class="form-element" name="fields[storyFull]" placeholder="Write your story...">{%- if entryExists %}{{ entry.storyFull }}{% endif -%}</textarea>
+                        -->
+                        <div id="editor"></div>
+                    </article>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

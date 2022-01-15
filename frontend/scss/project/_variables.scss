@@ -1,0 +1,51 @@
+/*** Colours ***/
+$white: #fff;
+$black: rgba(0, 0, 0, .84);
+$black-light: rgba(0, 0, 0, .64);
+$green: #41dd70; //#70d392;
+$red: #e54d42;
+$blue: #0084b4;
+$grey-min: rgba(0, 0, 0, .04);
+$grey-lightest: rgba(0, 0, 0, .06);
+$grey-lighterer: rgba(0, 0, 0, 0.14);
+$grey-lighter: rgba(0, 0, 0, 0.29);
+$grey-light: rgba(0, 0, 0, 0.41);
+$grey-medium: rgba(0, 0, 0, 0.54);
+$grey-dark: #444;
+$grey-darker: #333;
+$grey-darkerer: #111;
+
+$worldBlue: $blue;
+$twitterBlue: #00aced;
+$facebookBlue: #3b5998;
+
+/*** Fonts ***/
+$font-main-sans-serif: 'Lato', Helvetica, Arial, sans-serif;
+$font-main-serif: 'PT Serif', serif;
+
+/*** Sizes ***/
+$story-height: 505px;
+$user-height: 300px;
+$story-header-height: 155px;
+$user-header-height: 100px;
+$footer-margin-top-small: 50px;
+$footer-margin-top-medium: 100px;
+
+$story-excerpt-border-radius: 4px;
+
+/* --------------------------------------------------------------
+	Jam overides
+-------------------------------------------------------------- */
+/*** Container ***/
+$container-width: 1200px;
+
+/*** Button ***/
+$primary-button-bg-color: $green;
+$primary-button-bg-hover-color: darken($green, 8%);
+$primary-button-color: $white;
+$primary-button-border-radius: 3px;
+$primary-button-padding: 10px 20px;
+
+/*** Form ***/
+$input-border-color: transparent;
+$input-height: auto;

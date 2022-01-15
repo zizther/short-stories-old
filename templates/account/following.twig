@@ -1,0 +1,50 @@
+{% extends "_layouts/_layout" %}
+
+{% set pageRequireLogin = true %}
+
+{% set title = 'Following' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+    <div class="container">
+        {% if not currentUser %}
+            <p>You need to <a href="{{ url('login') }}" title="Login">login</a> in order to see the authors you follow.</p>
+        {% else %}
+            {% set userFollowingUsers = craft.follow.getFollowing() %}
+            {% set followingLength =  userFollowingUsers | length %}
+
+            {% if followingLength > 0 %}
+				{% set followingIds = '' %}
+
+				{% for u in userFollowingUsers %}
+					{% set followingIds =  followingIds ~ u.id ~ ', ' %}
+				{% endfor %}
+
+				{% paginate craft.users.id(followingIds).limit(12) as followingUsersInfo, followingUsers %}
+
+                <div class="small-title search-result-title">You are following {{ followingLength }} author{% if followingLength > 1 %}s{% endif %}</div>
+
+				{% include '_global/_pagination' with {
+					position: 'top',
+					entriesInfo: followingUsersInfo
+				} %}
+
+                <div class="grid">
+                    {% for user in followingUsers %}
+                        {% include '_global/_user-excerpt' with { user: user } %}
+                    {% endfor %}
+                </div>
+
+				{% include '_global/_pagination' with {
+					position: 'bottom',
+					entriesInfo: followingUsersInfo
+				} %}
+            {% else %}
+				<div class="message message--spacing-top">
+					<h2>You are not following anyone</h2>
+					<p>Start following authors to see them appear in this list.</p>
+				</div>
+            {% endif %}
+        {% endif %}
+    </div><!-- / .container -->
+{% endblock %}

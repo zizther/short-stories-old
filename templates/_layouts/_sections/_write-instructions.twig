@@ -1,0 +1,10 @@
+{% if showWriteInstructions %}
+    {% include '_global/_write-instructions' %}
+
+    <form id="member-write-instructions-form" method="post" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        <input type="hidden" name="action" value="users/save-user">
+        <input type="hidden" name="userId" value="{{ currentUser.id }}">
+        <input type="hidden" name="fields[memberShowWriteInstructions]" value="1">
+    </form>
+{% endif %}

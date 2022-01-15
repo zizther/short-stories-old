@@ -1,0 +1,13 @@
+fieldLayouts:
+  83e37c5b-9107-42bf-9f36-385ee464a688:
+    tabs:
+      -
+        fields:
+          cc96f1b4-59ca-4521-99d8-9751d86b9136:
+            required: false
+            sortOrder: 1
+        name: 'Footer globals'
+        sortOrder: 1
+handle: footer
+name: Footer
+sortOrder: 1

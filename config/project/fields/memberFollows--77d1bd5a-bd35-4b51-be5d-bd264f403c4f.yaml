@@ -1,0 +1,17 @@
+contentColumnType: string
+fieldGroup: c6a8cf07-e8f1-48db-a89c-b02f0a7a1c91
+handle: memberFollows
+instructions: ''
+name: Follows
+searchable: '1'
+settings:
+  limit: ''
+  localizeRelations: false
+  selectionLabel: ''
+  source: null
+  sources: '*'
+  targetSiteId: null
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: modules\fields\Users

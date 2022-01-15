@@ -1,0 +1,45 @@
+{
+	"buttons": ["html", "format", "bold", "italic", "underline"],
+	"plugins": [],
+	"toolbarFixed": true,
+	"formatting": [],
+    "formattingAdd": {
+        "p": {
+            "title": "Normal text",
+            "api": "module.block.format",
+            "args": {
+                "tag": "p"
+            }
+        },
+        "h2": {
+            "title": "Heading",
+            "api": "module.block.format",
+            "args": {
+                "tag": "h2"
+            }
+        },
+        "quote": {
+            "title": "Quote",
+            "api": "module.block.format",
+            "args": {
+                "tag": "blockquote"
+            }
+        },
+        "spacer": {
+            "title": "Spacer",
+            "api": "module.block.format",
+            "args": {
+                "tag": "div",
+                "class": "story-spacer"
+            }
+        }
+    },
+	"toolbar": true,
+	"shortcuts": true,
+	"tabKey": false,
+	"pasteImages": false,
+	"pasteLinks": false,
+	"pasteBlockTags": ["p", "h2", "blockquote", "i", "em", "b", "strong", "u"],
+	"pasteInlineTags": [],
+	"dragFileUpload": false
+}

@@ -1,0 +1,39 @@
+{% extends "_layouts/_layout" %}
+
+{% block content %}
+	{% cache %}
+        {% set topLevel = craft.entries({
+            section: 'help',
+            level: 1
+        }).all() %}
+
+        <section class="hero">
+            <h2>{{ entry.helpCentreSubtitle | nl2br }}</h2>
+
+            <form class="help-search">
+                <input type="text" name="q" placeholder="Search">
+                <button type="submit"></button>
+            </form>
+        </section>
+
+		<section class="container page-content main-content">
+            <aside class="help-sidebar">
+                {% for entry in topLevel %}
+                    <a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a>
+                {% endfor %}
+            </aside>
+
+            <div class="help-content">
+                {% for entry in topLevel %}
+                    <div class="help-group">
+                        {{ entry.helpSubtitle | rv  }}
+
+                        {% for child in entry.children().all() %}
+                            <a href="{{ child.url }}" title="{{ child.title }}">{{ child.title }}</a>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+		</section>
+	{% endcache %}
+{% endblock %}

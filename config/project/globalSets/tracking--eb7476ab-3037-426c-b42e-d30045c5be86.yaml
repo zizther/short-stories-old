@@ -1,0 +1,13 @@
+fieldLayouts:
+  b7cfdc1d-c3ed-47fc-aeeb-7e57a9579f6a:
+    tabs:
+      -
+        fields:
+          264ef4a6-bc99-4559-96b1-988407b6d8b6:
+            required: false
+            sortOrder: 1
+        name: Tracking
+        sortOrder: 1
+handle: tracking
+name: Tracking
+sortOrder: 7

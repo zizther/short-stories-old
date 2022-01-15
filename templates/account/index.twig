@@ -1,0 +1,126 @@
+{% extends "_layouts/_layout" %}
+
+{% set title = 'Edit account' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+
+	{% import "_macros/_errors" as errors %}
+	{% import "_macros/_author" as authorMacros %}
+    {% import "_macros/_components" as componentsMacros %}
+
+    <div class="container page-content">
+        {% include 'account/_sidebar' %}
+
+        <div class="account-content">
+            <h1>{{ title }}</h1>
+
+            {% if craft.app.request.getParam('activate') == 'success' %}
+                <div class="message message-valid">
+                    <p>Great job, you successfully activiated your account</p>
+                </div>
+            {% endif %}
+
+            {% if craft.app.request.getParam('activate') == 'fail' %}
+                <div class="message message-error">
+                    <p>Your account activiation has failed</p>
+                </div>
+            {% endif %}
+
+            {% if not currentUser %}
+                <div class="message">
+                    <p>You need to <a href="{{ url('login') }}" title="Login">login</a> in order to edit your account.</p>
+                </div>
+            {% else %}
+                {% if craft.app.request.getParam('success') %}
+                    <div class="message message-info">
+                        <p>Your account has been updated.</p>
+                    </div>
+                {% endif %}
+
+				{{ authorMacros.authorVerifyMessage(currentUser) }}
+
+                <form class="account-form" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                    {{ csrfInput() }}
+                    <input type="hidden" name="action" value="users/saveUser">
+                    <input type="hidden" name="redirect" value="account/?success=true">
+                    <input type="hidden" name="userId" value="{{ currentUser.id }}">
+
+                    <fieldset>
+                        {#
+                        {% if currentUser.memberProfile.one() %}
+                            <input type="file" name="userPhoto" value="Change Photo">
+                        {% else %}
+                            <input type="file" name="userPhoto" value="Upload">
+                        {% endif %}
+                        #}
+
+                        <img class="account-profile-img image-circle" src="{{ profileImage.getUrl('memberSmall') }}" alt="">
+                        <label for="user-photo">{{ (currentUser.memberProfile.one() ? 'Change your profile image' : 'Upload a profile image') }}</label>
+                        <input id="user-photo" class="form-element"  type="file" name="userPhoto" >
+
+                        {% if profileImage %}
+                            {# Setup a delete action #}
+                            <a id="delete-user-image" class="button" href="#0" title="Delete profile image">Delete profile image</a>
+
+                            {# Setup a hidden deleteUserPhoto field with no value #}
+                            <input id="#delete-user-image-input" type="hidden" name="deleteUserPhoto">
+                        {% endif %}
+                    </fieldset>
+
+                    <fieldset>
+						{{ componentsMacros.verifiedBadge(currentUser, 'Account verified') }}
+
+                        <label for="member-username">Username</label>
+                        <input id="member-username" class="form-element" type="text" name="username" value="{{ currentUser.username}}">
+                        <p><small>If you change your username it will affect any external links.</small></p>
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('username')) }}
+                        {% endif %}
+
+                        <label for="member-firstName">First name</label>
+                        <input id="member-firstName" class="form-element" type="text" name="firstName" value="{{ currentUser.firstName}}">
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('firstName')) }}
+                        {% endif %}
+
+                        <label for="member-lastName">Last name</label>
+                        <input id="member-lastName" class="form-element" type="text" name="lastName" value="{{ currentUser.lastName }}">
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('lastName')) }}
+                        {% endif %}
+                    </fieldset>
+
+                    <fieldset>
+                        <label for="member-website">Website</label>
+                        <input id="member-website" class="form-element" type="text" name="fields[memberWebsiteUrl]" value="{{ currentUser.memberWebsiteUrl }}">
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('memberWebsiteUrl')) }}
+                        {% endif %}
+
+                        <label for="member-twitter">Twitter</label>
+                        <input id="member-twitter" class="form-element" type="text" name="fields[memberTwitterUrl]" value="{{ currentUser.memberTwitterUrl }}">
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('memberTwitterUrl')) }}
+                        {% endif %}
+
+                        <label for="member-facebook">Facebook</label>
+                        <input id="member-facebook" class="form-element" type="text" name="fields[memberFacebookUrl]" value="{{ currentUser.memberFacebookUrl }}">
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('memberFacebookUrl')) }}
+                        {% endif %}
+
+                        <label for="member-bio">Bio</label>
+                        <textarea id="member-bio" class="form-element" type="text" name="fields[memberBio]">{{ currentUser.memberBio }}</textarea>
+                        <div id="counter"></div>
+                        {% if account is defined %}
+                            {{ errors.errorList(account.getErrors('memberBio')) }}
+                        {% endif %}
+                    </fieldset>
+
+                    <button class="button" type="submit">Submit</button>
+                </form>
+            {% endif %}
+        </div><!-- / .account-content -->
+    </div><!-- / .container -->
+{% endblock %}

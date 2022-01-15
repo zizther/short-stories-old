@@ -1,0 +1,16 @@
+fieldLayouts:
+  bf019c0f-252a-4a25-af51-73a3f2d035f1:
+    tabs:
+      -
+        fields:
+          a46f516e-aa28-47d1-868f-9a47d8b594b5:
+            required: false
+            sortOrder: 2
+          aecec947-68f3-4315-9fcf-c350e7531c3c:
+            required: false
+            sortOrder: 1
+        name: Content
+        sortOrder: 1
+handle: newsletter
+name: Newsletter
+sortOrder: 4

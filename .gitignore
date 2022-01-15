@@ -1,0 +1,63 @@
+###################################
+# Numerous always-ignore extensions
+###################################
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+._*
+.~lock.*
+.buildpath
+.wafpickle-N
+.lock-wscript
+
+######################
+# OS or Editor folders
+######################
+.DS_Store
+Thumbs.db
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+nbproject
+
+###################
+# Folders to ignore
+###################
+/.hg
+/.svn
+/.CVS
+/CVS
+/intermediate
+/publish
+/.idea
+/_notes
+
+##################
+# Front-end assets
+##################
+*.sass-cache
+*config.codekit
+*compass_app_log.txt
+
+#####
+# NPM
+#####
+/node_modules
+
+################
+# Project files
+################
+/.env
+/vendor
+.env-gulp.json
+#/web/assets/dist/*
+/web/imager
+/imager

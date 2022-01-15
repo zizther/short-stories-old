@@ -1,0 +1,23 @@
+{% if entriesInfo.totalPages > 1 %}
+    <div class="pagination pagination--{{ position }}">
+        <div class="pagination-btns">
+            {% if entriesInfo.prevUrl %}
+            <a class="pag-btn" href="{{ entriesInfo.firstUrl }}" title="Go to first page"><i class="icon-arrow-left"></i></a>
+            {% endif %}
+
+            {% for page, url in entriesInfo.getPrevUrls(2) %}
+                <a class="pag-btn" href="{{ url }}" title="Go to page {{ page }}">{{ page }}</a>
+            {% endfor %}
+
+            <span class="pag-btn current">{{ entriesInfo.currentPage }}</span>
+
+            {% for page, url in entriesInfo.getNextUrls(2) %}
+                <a class="pag-btn" href="{{ url }}" title="Go to page {{ page }}">{{ page }}</a>
+            {% endfor %}
+
+            {% if entriesInfo.nextUrl %}
+            <a class="pag-btn" href="{{ entriesInfo.lastUrl }}" title="Go to last page"><i class="icon-arrow-right"></i></a>
+            {% endif %}
+        </div><!-- / .pagination-btns -->
+    </div><!-- / .pagination -->
+{% endif %}

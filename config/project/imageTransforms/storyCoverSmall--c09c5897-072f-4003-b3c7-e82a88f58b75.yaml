@@ -1,0 +1,9 @@
+format: null
+handle: storyCoverSmall
+height: '300'
+interlace: none
+mode: crop
+name: 'Story cover small'
+position: center-center
+quality: '82'
+width: '200'

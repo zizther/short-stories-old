@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 8
+template: account/bookmarks
+uriParts:
+  - account/my-bookmarks
+uriPattern: account/my-bookmarks

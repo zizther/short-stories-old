@@ -1,0 +1,30 @@
+{#
+    @param {[int]} time [the read time of the story]
+    @param {[int]} currentEntry [the entry.id to not include in the entries call]
+#}
+
+{% set readTimeSearch = time | readTimeSearch %}
+
+{% set entries = craft.entries({
+    section: 'stories',
+    storyReadTimeSearch: readTimeSearch,
+    id: 'not ' ~ currentEntry,
+    limit: 4,
+	orderBy: 'RAND()',
+    with: [
+        ['storyCategories']
+    ]
+}).all() %}
+
+{% if entries | length %}
+    <section class="related-stories spacing--minus-ftr">
+        <div class="container">
+            <div class="small-title related-stories-title">Related stories</div>
+                <div class="grid">
+                    {% include '_global/_story-excerpt' with { stories: entries } %}
+                </div>
+
+            <a class="button" href="{{ url('stories/time/' ~ entry.storyReadTimeSearch) }}" title="See more stories">See more stories</a>
+        </div>
+    </section><!-- / .related-stories -->
+{% endif %}

@@ -1,0 +1,61 @@
+/* --------------------------------------------------------------
+	Animations
+
+	Additional animation can be added from http://daneden.github.io/animate.css/
+    Use WOW JS to reveal animations when you scroll http://mynameismatthieu.com/WOW/
+-------------------------------------------------------------- */
+@include keyframes('fade-in') {
+   from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@include keyframes('scale-fade') {
+    0% {
+        opacity: 0;
+        transform: scale(.8) rotateX(-40deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    70% {
+	    opacity: 1;
+        transform: scale(1.05) rotateX(0) translateZ(0);
+    }
+    100% {
+	    opacity: 1;
+        transform: scale(1) rotateX(0) translateZ(0);
+    }
+}
+
+@include keyframes('modal-scale-fade') {
+    0% {
+        opacity: 0;
+        transform: scale(.8) rotateX(-40deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    70% {
+	    opacity: 1;
+        transform: scale(1.05) rotateX(0) translateY(-50%) translateZ(0);
+    }
+    100% {
+	    opacity: 1;
+        transform: scale(1) rotateX(0) translateY(-50%) translateZ(0);
+    }
+}
+
+@include keyframes('pop-upwards') {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) translateZ(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
+}

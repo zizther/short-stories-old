@@ -1,0 +1,72 @@
+.login-modal {
+    background: rgba(65, 222, 112, .96);
+
+    h2,
+    a {
+	    color: $white;
+    }
+
+    .login-form-wpr {
+        background: url('../graphics/logo-stamp.png') no-repeat center top;
+        background-size: 200px auto;
+        margin-bottom: 20px;
+        max-width: 360px;
+        padding: 130px 20px 0;
+
+        @media #{$bp-medium} {
+            background-size: 270px auto;
+            padding-top: 170px;
+        }
+        @media only screen and (max-width: 767px) and (orientation: landscape) {
+            @include when-inside('.touch') {
+                margin-bottom: 30px;
+                margin-top: 120px;
+            }
+        }
+    }
+    input.form-element {
+	    background: rgba(255, 255, 255, .2);
+	    color: $white;
+	    margin-bottom: 5px;
+	    transition: all 150ms ease-out;
+
+	    &:focus {
+		    background: $white;
+		    color: $grey-dark;
+	    }
+
+	    &::-moz-placeholder {
+	        color: $white;
+	    }
+	    &:-ms-input-placeholder {
+	        color: $white;
+	    }
+	    &::-webkit-input-placeholder {
+	        color: $white;
+	    }
+    }
+    .submit {
+	    display: table;
+	    margin: 30px auto 0;
+    }
+}
+
+.login-form-meta {
+	@include clearfix;
+    margin: 10px 0 30px;
+
+    .remember-me,
+    .forgot-password {
+        color: $white;
+        float: left;
+        font-size: 1.2rem;
+        text-align: left;
+    }
+
+    .remember-me {
+        font-weight: 400;
+    }
+	.forgot-password {
+        float: right;
+	}
+}

@@ -1,0 +1,53 @@
+{% import "_macros/_helpers" as helperMacros %}
+
+{% for entry in stories %}
+    {% set isCurrentAuthor = entry.author.id | isCurrentAuthor %}
+	{% set excerpt = entry.storyExcerptWithFallback %}
+
+	{% set authorName = entry.author.fullName %}
+	{% set categories = entry.storyCategories %}
+	{% set storyReadTimeValue = entry.storyReadTimeSearch %}
+
+	<div class="excerpt story-excerpt">
+		{% if isCurrentAuthor %}
+			<div class="delete-story" data-entry="{{ entry.id }}"><i class="icon-delete"></i> Delete</div>
+		{% endif %}
+
+		<div class="col-frm">
+			<a class="story-time" href="{{ url('stories/time/' ~ storyReadTimeValue) }}" title="Find stories around {{ entry.storyReadTime }} long"><i class="icon-clock"></i> {{ entry.storyReadTimeMin }}</a>
+
+			<h2><a href="{{ entry.url }}" title="Read {{ entry.title }}">{{ entry.title }}</a></h2>
+
+			{% if isCurrentAuthor %}
+				<div class="story-user-meta">
+				{% if entry.status == 'disabled' %}
+					<div class="story-status-badge"><i class="icon-edit"></i> Draft</div>
+				{% else %}
+					{#
+					<div class="story-user-likes">
+						<i class="icon-clap"></i> {{ craft.upvote.tally(entry.id) }}
+					</div>
+					#}
+				{% endif %}
+				</div><!-- / .story-user-meta -->
+			{% endif %}
+
+			<div class="story-meta">
+				{% if categories | length %}
+	                {% nav category in categories %}
+	                    <a href="{{ category.url }}" title"{{ category.title }}">{{ category.title }}</a>{% if loop.index != loop.length %},{% endif %}
+	                {% endnav %}
+	            {% endif %}
+		        by <a href="{{ helperMacros.userUrl(entry.author) }}" title="All stories by {% if isCurrentAuthor %}You{% else %}{{ authorName }}{% endif %}"> {% if isCurrentAuthor %}You{% else %}{{ authorName }}{% endif %}</a>
+		    </div><!-- / .story-meta -->
+
+            {% if entry.storyContainsBadWords %}
+				<div class="story-warnings">
+					<p>* Story contains bad language</p>
+				</div>
+			{% endif %}
+
+			<div class="se-excerpt"><p>{{ excerpt }}</p></div>
+		</div>
+	</div><!-- / .story-excerpt -->
+{% endfor %}

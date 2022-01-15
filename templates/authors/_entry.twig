@@ -1,0 +1,140 @@
+{% extends "_layouts/_layout" %}
+
+{% set user = craft.users.username(craft.app.request.segment(2)).one() %}
+
+{% if not user %}
+    {% do seomatic.meta.seoTitle("404") %}
+    {% exit 404 %}
+{% endif %}
+
+{% set isCurrentAuthor = user.id | isCurrentAuthor %}
+
+{% set authorName = user.fullName %}
+{% do seomatic.meta
+    .seoTitle(authorName)
+    .seoDescription("View all stories written by " ~ authorName)
+%}
+
+{% block content %}
+	{% import "_macros/_author" as authorMacros %}
+    {% import "_macros/_components" as components %}
+
+    {% set userProfileImage = user.memberProfile.one() ?? profileImages.defaultProfileImage.one() %}
+
+    {% set userWebsite = user.memberWebsiteUrl %}
+    {% set userTwitter = user.memberTwitterUrl %}
+    {% set userFacebook = user.memberFacebookUrl %}
+    {% set userInstagram = user.memberInstagramUrl %}
+
+    {% paginate craft.entries({
+        section: 'stories',
+        authorId: user.id,
+        status: userStatus,
+        limit: 12,
+        with: [
+            ['storyCategories']
+        ]
+    }) as entriesInfo, entries %}
+
+    <div class="container author-container">
+        {% if isCurrentAuthor %}
+            <a class="button button-small page-float-button" href="{{ url('account') }}" title="Edit profile">Edit profile</a>
+        {% endif %}
+
+        <div class="author-deets">
+            <div class="image-halo image-halo--medium">
+    			<img class="image-circle" src="{{ userProfileImage.getUrl('memberMedium') }}" alt="{{ authorName }}">
+    			{#{% include '_global/_image-halo' %}#}
+    		</div>
+
+            <h1>
+				{{ authorName }}
+				{{ components.verifiedBadge(user) }}
+			</h1>
+
+            {% if user.memberLocation %}
+                <p><i class="icon-location"></i> {{ user.memberLocation }}</p>
+            {% endif %}
+
+            {% if user.memberBio %}
+                <div class="author-bio">
+                    <p>{{ user.memberBio | widno }}</p>
+                </div>
+            {% endif %}
+
+            {% if userWebsite or userTwitter or userFacebook %}
+            <div class="author-links">
+                {% if userWebsite %}<a class="link link--website icon-globe" href="{{ userWebsite }}" title="{{ authorName }} - Website (opens new window)" aria-label="(opens new window)" target="_blank" rel="noreferrer"><span class="desktop-el"> Website</span></a>{% endif %}
+                {% if userTwitter %}<a class="link link--twitter icon-twitter" href="{{ userTwitter }}" title="{{ authorName }} - Twitter (opens new window)" aria-label="(opens new window)" target="_blank" rel="noreferrer"><span class="desktop-el"> Twitter</span></a>{% endif %}
+                {% if userFacebook %}<a class="link link--facebook icon-facebook" href="{{ userFacebook }}" title="{{ authorName }} - Facebook (opens new window)" aria-label="(opens new window)" target="_blank" rel="noreferrer"><span class="desktop-el"> Facebook</span></a>{% endif %}
+                {% if userInstagram %}<a class="link link--instagram icon-instagram" href="{{ userInstagram }}" title="{{ authorName }} - Instagram (opens new window)" aria-label="(opens new window)" target="_blank" rel="noreferrer"><span class="desktop-el"> Instagram</span></a>{% endif %}
+            </div>
+            {% endif %}
+
+            {% if beta %}
+                {% if currentUser %}
+                    {% if isCurrentAuthor %}
+                    {#
+                        {% if craft.follow.isFollow(user.id) %}
+                            <a class="button follow-button" href="{{ actionUrl('follow/stopFollowing', {id:user.id}) }}">Unfollow</a>
+                        {% else %}
+                            <a class="button follow-button" href="{{ actionUrl('follow/startFollowing', {id:user.id}) }}">Follow</a>
+                        {% endif %}
+                    #}
+                    {% endif %}
+                {% else %}
+                    <div class="button disabled follow-button login-required">Follow</div>
+                {% endif %}
+            {% endif %}
+
+            {{ authorMacros.authorStats(user) }}
+
+			{% if currentUser %}
+                {% if currentUser.id == user.id %}
+					{{ authorMacros.authorVerifyMessage(currentUser) }}
+				{% endif %}
+			{% endif %}
+        </div><!-- / .author-deets -->
+
+        <div class="grid">
+            {% if isCurrentAuthor %}
+                <div class="excerpt write-cta-excerpt">
+                    <a class="col-frm" href="{{ url('write') }}" title="Start a new story">
+                        <div class="cta-cont">
+                            <i class="icon-plus"></i>
+                            <div class="small-title">Start a new story</div>
+                        </div>
+                    </a>
+                </div><!-- / .excerpt -->
+            {% endif %}
+
+            {% if entries|length %}
+                {% include '_global/_story-excerpt' with {
+                    stories: entries
+                } %}
+            {% else %}
+                {% if not isCurrentAuthor %}
+                    <h3 class="no-stories-yet">The author has no stories yet.</h3>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        {% include '_global/_pagination' with {
+            position: 'bottom',
+            entriesInfo: entriesInfo
+        } %}
+    </div><!-- / .container -->
+
+	<script type="application/ld+json">
+		{
+		    "@context": "http://schema.org/",
+		    "@type": "Person",
+		{% if user.memberProfile.one() %}
+			"image": "{{ user.memberProfile.one().getUrl('memberMedium') }}",
+		{% endif %}
+			"url": "{{ craft.app.request.absoluteUrl }}",
+		    "name": "{{ authorName }}",
+		    "alternateName": "{{ user.fullName }}"
+		}
+	</script>
+{% endblock %}

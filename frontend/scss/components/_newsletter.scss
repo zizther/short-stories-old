@@ -1,0 +1,74 @@
+.newsletter-bar {
+    color: $grey-medium;
+
+	.container {
+        background: $grey-min url('../graphics/newsletter-small.png') no-repeat 50% 0%;
+        background-size: 100% auto;
+        border-radius: $story-excerpt-border-radius;
+		padding: 25% 25px 25px;
+
+        @media #{$bp-small} {
+            background-position: 50% -5%;
+        }
+
+        @media #{$bp-medium} {
+            background-image: url('../graphics/newsletter.png');
+            background-position: 0 50% !important;
+            background-size: auto 100%;
+            padding: 40px 0 50px 25vw;
+        }
+	}
+
+    h2 {
+        color: $black;
+        font-family: $font-main-serif;
+        font-size: 2.8rem;
+
+        @media #{$bp-small} {
+            font-size: 3.2rem;
+        }
+
+        @media #{$bp-medium} {
+            font-size: 3.6rem;
+            margin-bottom: 20px;
+        }
+    }
+    p {
+        font-size: 1.6rem;
+
+        @media #{$bp-medium} {
+            font-size: 1.8rem;
+        }
+    }
+    form {
+        @media #{$bp-medium} {
+            margin-top: 25px;
+        }
+    }
+
+	.field-group {
+		@include clearfix;
+
+		input,
+		button {
+            float: left;
+		}
+		input {
+            background: none;
+            border-bottom: 1px solid $grey-lighterer;
+            font-size: 1.6rem;
+            padding: 7px 0;
+            width: 250px;
+
+			@media #{$bp-medium} {
+                font-size: 1.8rem;
+				margin-bottom: 0;
+                width: 300px;
+			}
+		}
+		button {
+            margin-left: 20px;
+            width: auto;
+		}
+	}
+}

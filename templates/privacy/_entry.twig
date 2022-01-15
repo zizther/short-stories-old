@@ -1,0 +1,14 @@
+{% extends "_layouts/_layout" %}
+
+{% block content %}
+	{% cache %}
+		<section class="container page-content main-content">
+			<h1>{{ entry.title }}</h1>
+
+            {% include '_global/_common-page-content' with {
+                content: entry.commonContent.all(),
+                titleLinks: true
+            } %}
+		</section>
+	{% endcache %}
+{% endblock %}

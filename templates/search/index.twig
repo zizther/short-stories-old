@@ -1,0 +1,40 @@
+{% extends "_layouts/_layout" %}
+
+{% set query = craft.app.request.getParam('q') %}
+
+{% set title = 'Search' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+	{% paginate craft.entries({
+		search: query,
+		section: 'stories',
+		limit: 12,
+		orderBy: 'score',
+		with: [
+			['storyCategories']
+		]
+	}) as entriesInfo, entries %}
+
+	<div class="container">
+        <div class="search-meta">
+            <div class="search-meta__info">
+		        <h1>Search results for '{{ query }}'</h1>
+            </div>
+        </div>
+
+		{% include '_global/_pagination' with {
+			position: 'top',
+			entriesInfo: entriesInfo
+		} %}
+
+		<div class="grid">
+			{% include '_global/_story-excerpt' with { stories: entries } %}
+		</div>
+
+		{% include '_global/_pagination' with {
+			position: 'bottom',
+			entriesInfo: entriesInfo
+		} %}
+	</div>
+{% endblock %}

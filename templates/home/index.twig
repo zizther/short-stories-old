@@ -1,0 +1,172 @@
+{% extends "_layouts/_layout" %}
+
+{% block content %}
+	<div class="time-selector --home">
+		<div class="small-title time-selector-cont">
+			<i class="icon-clock"></i> How many minutes do you have?
+
+			<div class="buttons">
+				{% for btn in [1, 5, 10, 20, 30, 60] %}
+					<a class="button button-border-green button-round" href="{{ url('stories/time/'~btn) }}" title="{{ btn }} minute{{ btn > 1 ? 's' }}">{{ btn }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div><!-- / .time-selector -->
+
+
+{% cache globally using key 'homeStoriesRandomTab' for 1 hours %}
+    {# Get random stories, which do not contain bad words #}
+    {% set randomStories = craft.entries({
+        section: 'stories',
+        storyContainsBadWords: 0,
+        limit: 12,
+        orderBy: 'RAND()',
+        with: [
+            ['storyCategories']
+        ]
+    }).all() %}
+
+    <div class="container">
+        <section class="tab-sections">
+            <div class="tabbed-section">
+                <div class="grid">
+                    {% include '_global/_story-excerpt' with { stories: randomStories[:4] } %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+	{% include '_global/_newsletter-bar' %}
+
+	<div class="container">
+        <section class="tab-sections">
+            <div class="tabbed-section">
+                <div class="grid">
+                    {% include '_global/_story-excerpt' with { stories: randomStories[4:12] } %}
+                </div>
+
+                <a class="button button--middle" href="{{ url('stories') }}" title="Discover more stories">Discover more stories</a>
+            </div>
+        </section>
+{% endcache %}
+
+        {% if beta %}
+    		{% set tabParam = craft.app.request.getParam('tab') %}
+    		<section class="tabbed-section">
+                {% if currentUser %}
+    			    <nav class="tab-nav">
+        				<a{% if tabParam == '' or tabParam == 'stories-tab' %} class="active"{% endif %} href="#stories-tab" title="Stories">Stories</a>
+
+                        {#
+                        <a{% if tabParam == 'most-recent' %} class="active"{% endif %} href="#most-recent" title="Most recent stories">Most recent</a>
+        				<a{% if tabParam == 'top-authors' %} class="active"{% endif %} href="#top-authors" title="Top authors">Top authors</a>
+                        #}
+        				{% if currentUser %}
+        					<a{% if tabParam == 'following' %} class="active"{% endif %} href="#following" title="Following">Following</a>
+        					<a{% if tabParam == 'my-bookmarks' %} class="active"{% endif %} href="#my-bookmarks" title="My bookmarks">My bookmarks</a>
+        				{% endif %}
+        			</nav><!-- / .tab-nav -->
+                {% endif %}
+
+    			<div class="tab-sections">
+    				<div class="tab{% if tabParam == '' or tabParam == 'stories-tab' %} active{% endif %}" id="stories-tab">
+    					{% cache globally using key 'homeStoriesTab' for 1 hours %}
+                            {% set recentStories = craft.entries({
+                                section: 'stories',
+                                limit: 12,
+                                orderBy: 'RAND()',
+                                with: [
+                                    ['storyCategories']
+                                ]
+                            }).all() %}
+                            <div class="grid">
+                                {% include '_global/_story-excerpt' with { stories: recentStories } %}
+                            </div>
+    					{% endcache %}
+    				</div>
+
+                    {#
+    				<div class="tab{% if tabParam == 'most-recent' %} active{% endif %}" id="most-recent">
+    					{% cache globally using key 'homeMostRecentTab' for 3 hour %}
+    			    		{% set recentStories = craft.entries({
+    							section: 'stories',
+    							limit: 12,
+    					        with: [
+    					            ['storyCategories']
+    					        ]
+    						}).all() %}
+    						<div class="grid">
+    							{% include '_global/_story-excerpt' with { stories: recentStories } %}
+    						</div>
+    					{% endcache %}
+    				</div>
+
+    				<div class="tab{% if tabParam == 'top-authors' %} active{% endif %}" id="top-authors">
+    					{% cache globally using key 'homeTopAuthorTab' for 3 hour %}
+    						<div class="grid">
+    							{% for user in popularUsers %}
+    								{% include '_global/_user-excerpt' with { user: user } %}
+    							{% endfor %}
+    						</div>
+    					{% endcache %}
+    				</div>
+                    #}
+
+
+    				{% if currentUser %}
+    					<div class="tab{% if tabParam == 'following' %} active{% endif %}" id="following">
+                            {% set followingTotal = currentUser.memberFollows.count() %}
+
+    		                {% if followingTotal > 0 %}
+                                {% set followingEntries = currentUser.memberBookmarks.limit(12).all() %}
+
+    							<p>You are following {{ followingTotal }} author{% if followingTotal > 1 %}s{% endif %}.</p>
+
+    							<div class="grid">
+    								{% for user in followingEntries %}
+    									{% include '_global/_user-excerpt' with { user: user } %}
+    								{% endfor %}
+    							</div>
+
+    							{% if followingTotal > 12 %}
+    								<a class="button button--middle" href="{{ url('account/following') }}" title="View all authors">View all authors<a>
+    							{% endif %}
+    		                {% else %}
+    							<div class="message">
+    			                    <p>You are not following anyone.</p>
+    							</div>
+    		                {% endif %}
+    					</div>
+
+    					<div class="tab{% if tabParam == 'my-bookmarks' %} active{% endif %}" id="my-bookmarks">
+    						{% set bookmarksTotal = currentUser.memberBookmarks.count() %}
+
+    						{% if bookmarksTotal > 0 %}
+                                {% set bookmarksIds = currentUser.memberBookmarks.limit(12).ids() %}
+                                {% set bookmarkStories = craft.entries({
+        							section: 'stories',
+        							id: bookmarksIds,
+        					        with: [
+        					            ['storyCategories']
+        					        ]
+        						}).all() %}
+
+    							<div class="grid">
+    								{% include '_global/_story-excerpt' with { stories: bookmarkStories } %}
+    							</div>
+
+    							{% if bookmarksTotal > 12 %}
+    								<a class="button button--middle" href="{{ url('account/bookmarks') }}" title="View all bookmarks">View all bookmarks<a>
+    							{% endif %}
+    						{% else %}
+    							<div class="message">
+    			                    <p>You don't have any bookmarks at the moment.</p>
+    							</div>
+    		                {% endif %}
+    					</div>
+    				{% endif %}
+    			</div><!-- / .tab-sections -->
+		    </section><!-- / .tabbed-section -->
+        {% endif %}
+	</div><!-- / .container -->
+{% endblock %}

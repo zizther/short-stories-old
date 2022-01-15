@@ -1,0 +1,7 @@
+handle: contact
+hasTitleField: true
+name: Contact
+section: 52205f2a-f66c-4a1e-8d94-29bd81572a2d # Contact
+sortOrder: 1
+titleFormat: '{section.name|raw}'
+titleLabel: Title

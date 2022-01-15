@@ -1,0 +1,16 @@
+<ul>
+    <li><a href="{{ url('stories') }}" title="Discover">Discover</a></li>
+	<li><a class="search-button" href="#" title="Search">Search</a></li>
+
+    {% if beta %}
+    	<li class="dd mobile-el">
+            <a class="dd-btn" href="{{ url('account') }}" title="My account">My account <i class="icon-arrow-block-down"></i></a>
+            <ul class="dd-nav">
+    			{% include '_layouts/_account-nav' with {
+    				wrap: 'li',
+    				signOut: false
+    			} %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>

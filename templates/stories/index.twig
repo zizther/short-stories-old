@@ -1,0 +1,59 @@
+{% extends "_layouts/_layout" %}
+
+{% set title = "Discover stories" %}
+{% set description = "Discover a world of short stories from a wide variety of categories and authors." %}
+
+{% do seomatic.meta.setAttributes({
+    "seoTitle": title,
+    "seoDescription": description
+}) %}
+
+{% block content %}
+	{% paginate craft.entries({
+		section: 'stories',
+		limit: 12,
+		with: [
+			['storyCategories']
+		]
+	}) as entriesInfo, entries %}
+
+    <div class="container">
+        <div class="search-meta">
+            <div class="search-meta__info">
+                <h1>{{ title }}</h1>
+
+                <div class="para-large">
+                    <p>{{ description }}</p>
+                </div>
+            </div><!-- / .search-meta__info -->
+        </div><!-- / .search-meta -->
+
+
+        <h2 style="text-align: center;">Time</h2>
+        <div class="time-search" style="text-align: center;">
+            {% for btn in [1, 5, 10, 20, 30, 60, 90] %}
+                <a class="button button-border-green button-round" href="{{ url('stories/time/'~btn) }}" title="{{ btn }} minute{{ btn > 1 ? 's' }}">{{ btn }}</a>
+            {% endfor %}
+        </div>
+
+        <br><br><br><br>
+
+        <h2 style="text-align: center;">Categories</h2>
+        {% set entryIds = craft.entries.section('stories').ids() %}
+        {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).groupId(2).orderBy('title').all() %}
+
+        <div class="grid">
+            {% for category in categories %}
+                {# Get the count of entries related to `category` #}
+                {% set entryCount = craft.entries.relatedTo(category).count() %}
+
+                <div class="excerpt category-excerpt">
+                    <a class="col-frm" href="{{ category.url }}" title="{{ category.title }}">
+                        <h2>{{ category.title }}</h2>
+                        <p>{{ entryCount }} stories</p>
+                    </a>
+                </div><!-- / .category-excerpt -->
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

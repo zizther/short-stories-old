@@ -1,0 +1,23 @@
+form {
+	label {
+		display: block;
+	}
+	input,
+	select,
+	textarea {
+		color: $grey-dark;
+		font-size: 1.4rem;
+		margin-bottom: 16px;
+		padding: 6px 8px 8px;
+		width: 100%;
+
+		@media #{$bp-medium} {
+			font-size: 1.6rem;
+			margin-bottom: 20px;
+			padding: 8px 10px 10px;
+		}
+	}
+}
+.form-element {
+    border: 1px solid $grey-dark;
+}

@@ -1,0 +1,40 @@
+fieldLayouts:
+  6f2df5f9-8f16-4f12-ad1a-bfee3478c043:
+    tabs:
+      -
+        fields:
+          2e3671ad-67b8-496e-84eb-1ba6d5fc1dc5:
+            required: false
+            sortOrder: 1
+          3b8e7bb3-d80b-4cec-8cd8-df0529adccee:
+            required: false
+            sortOrder: 6
+          06edbf70-81c1-434b-8010-9d3c457664db:
+            required: false
+            sortOrder: 3
+          09aa6510-93bc-41b6-b7cb-21b89bd15bcb:
+            required: false
+            sortOrder: 10
+          16daa892-9200-4d03-8876-ecf71e65e76a:
+            required: false
+            sortOrder: 8
+          c2b12e2a-486b-41f7-8e00-c48d23044807:
+            required: false
+            sortOrder: 4
+          c8a9d70a-b135-478e-bd97-09eb5f552c86:
+            required: false
+            sortOrder: 7
+          e7394c94-509b-4df6-b249-9d836b75d80b:
+            required: false
+            sortOrder: 9
+          f61b3a6c-1fc2-4ddb-8510-21b749ee570f:
+            required: false
+            sortOrder: 5
+          fd70336c-9483-43d5-b386-9dea200825f3:
+            required: false
+            sortOrder: 2
+        name: Content
+        sortOrder: 1
+handle: verificationBadge
+name: 'Verification Badge'
+sortOrder: 8

@@ -1,0 +1,80 @@
+field: 712bd1a5-485d-4df4-931c-335b9691181b
+fieldLayouts:
+  0a3e7e00-3b40-4502-a7b1-867a1f15e3ad:
+    tabs:
+      -
+        fields:
+          6a4953c3-57aa-4108-a2ee-8c0190d3f5bc:
+            required: true
+            sortOrder: 1
+          579ebac3-3bb0-449f-bc30-6c7ed94d0c22:
+            required: true
+            sortOrder: 2
+        name: Content
+        sortOrder: 1
+fields:
+  6a4953c3-57aa-4108-a2ee-8c0190d3f5bc:
+    contentColumnType: string
+    fieldGroup: null
+    handle: contentHeadingSize
+    instructions: ''
+    name: 'Heading size'
+    searchable: false
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - H2
+            -
+              - value
+              - h2
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - H3
+            -
+              - value
+              - h3
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - H4
+            -
+              - value
+              - h4
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  579ebac3-3bb0-449f-bc30-6c7ed94d0c22:
+    contentColumnType: text
+    fieldGroup: null
+    handle: contentHeadingText
+    instructions: ''
+    name: 'Heading text'
+    searchable: true
+    settings:
+      charLimit: ''
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: contentHeading
+name: Heading
+sortOrder: 1

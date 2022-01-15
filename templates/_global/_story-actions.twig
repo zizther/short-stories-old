@@ -1,0 +1,31 @@
+<aside class="story-actions">
+    {% if beta %}
+    	{% set votes = craft.users.relatedTo({targetElement: entry.id, field: 'memberLikes'}).count() %}
+
+        {% if currentUser %}
+            {% if not isCurrentAuthor %}
+    			{% set likesIds = currentUser.memberLikes.ids() %}
+    			{% set bookmarksIds = currentUser.memberBookmarks.ids() %}
+
+                <div class="story-likes-container">
+                    <div class="story-actions-action story-vote story-like {% if entry.id in likesIds %} --voted icon-heart-full{% else %} icon-heart{% endif %}" data-id="{{ entry.id }}" data-type="like"></div>
+
+                    <div class="story-like-count{% if votes <= 0 %} --hide{% endif %}" data-tally="{{ votes }}">
+                        {{ votes > story.unitPrefixMin ? votes | unitPrefix('decimal', 1) : votes }}
+                    </div>
+                </div>
+
+                <div class="story-actions-action story-vote story-bookmark {% if entry.id in bookmarksIds %} --voted icon-bookmarked{% else %} icon-bookmark{% endif %}" data-id="{{ entry.id }}" data-type="bookmark"></div>
+            {% endif %}
+        {% else %}
+            <div class="story-actions-action story-vote story-like icon-heart login-required"></div>
+
+            <div class="story-actions-action story-vote story-bookmark login-required"></div>
+        {% endif %}
+    {% endif %}
+
+    <h5 class="story-share-title">Share</h5>
+    <div class="story-actions-action story-share">
+        <div class="addthis_inline_share_toolbox"></div>
+    </div>
+</aside><!-- / .story-actions -->

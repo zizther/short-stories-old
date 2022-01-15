@@ -1,0 +1,37 @@
+{% if hero %}
+	{% for asset in hero %}
+	<style>
+		.hero{
+			background-image: url({{ asset.getUrl('heroSmall') }});
+		}
+		@media screen and (min-width:768px){
+			.hero{
+				background-image: url({{ asset.getUrl('heroLarge') }});
+			}
+		}
+	</style>
+	{% endfor %}
+{% endif %}
+
+<section class="hero {% if heroSize == 'small' %} hero-small{% endif %}" {% if heroId %}id="{{ heroId }}"{% endif %}>
+	<div class="hide-panel"></div>
+    <div class="hero-cont">
+        <h1 class="hero-title">{{ title | rv }}</h1>
+        {% if text %}
+        <div class="hero-text">
+            {{ text | rv }}
+	    </div>
+	    {% endif %}
+
+	    {% if heroId == 'home-hero' %}
+	    <div class="content-divide">
+            <div class="divider-line"></div>
+
+            <div class="address"><p><i class="icon-marker"></i> {{ global.address }}</p></div>
+            <a class="button button-border button-hover-effect" href="{{ global.googleMapsUrl }}" target="_blank">
+				<div class="button-hover-effect-text" data-content="Get Directions">Get Directions</div>
+			</a>
+        </div><!-- / .content-divide -->
+        {% endif %}
+    </div><!-- / .hero-cont -->
+</section><!-- / .hero-small -->

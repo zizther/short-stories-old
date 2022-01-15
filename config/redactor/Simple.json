@@ -1,0 +1,14 @@
+{
+    "buttons": [
+        "html",
+        "bold",
+        "italic",
+        "lists",
+        "link"
+    ],
+    "plugins": [
+        "fullscreen"
+    ],
+    "toolbarFixed": true,
+    "linkNewTab": true
+}

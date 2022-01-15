@@ -1,0 +1,181 @@
+dateModified: 1642206997
+email:
+  fromEmail: nathan@short-stories.co
+  fromName: 'Story Stories'
+  template: ''
+  transportSettings:
+    encryptionMethod: tls
+    host: smtp.sendgrid.net
+    password: '!!Afrobrow_15'
+    port: '587'
+    timeout: '30'
+    useAuthentication: 1
+    username: shortstories
+  transportType: craft\mail\transportadapters\Smtp
+meta:
+  __names__:
+    0b873fdc-8239-4532-addf-ce016f7bb303: 'Help Centre' # Help Centre
+    1dcb8fbd-f043-48c7-8c27-ee463cd47d0b: Stories # Stories
+    3cdb34ca-4584-4d98-bb74-6c962b982560: 'Home page' # Home page
+    4c25fe75-1874-427b-8c37-8cff1d33a7d2: Footer # Footer
+    7b5f0ec7-0669-4b52-b165-2b8538aef95f: About # About
+    21e7862b-ba2c-47c2-a6f2-d14454990e13: Legal # Legal
+    8539cb22-f67d-4219-8f6e-da97f89e6196: $SITE_NAME # $SITE_NAME
+    9265eb45-d3cb-4546-83f3-68a1d575be06: Global # Global
+    41863b1a-e966-42bd-ba5b-7dc7be17d7d8: Stories # Stories
+    52205f2a-f66c-4a1e-8d94-29bd81572a2d: Contact # Contact
+    a4b59c24-b6a9-47a2-9a2b-d3a029199175: Contact # Contact
+    ad89dcbd-ae9b-42db-a3a9-2fdc308d878f: 'Verification Badge' # Verification Badge
+    b9b29dbd-cc2e-4127-acfb-073ca44e95df: 'Home page' # Home page
+    b77e1c60-a896-4aef-8fed-0b5741dce3ed: Newsletter # Newsletter
+    cfeb647a-b88e-411f-8ceb-24431e04cd37: 'Help Centre' # Help Centre
+    e97702c3-8598-44cc-ad34-36e0bce303c1: Messages # Messages
+    eb7476ab-3037-426c-b42e-d30045c5be86: Tracking # Tracking
+    ec88dc87-444f-4f08-9ca4-86899809ebaf: About # About
+    f6c0b76f-1e8e-4f14-92e2-12f84d3f61ba: Help # Help
+    f81a47a9-d077-4529-a73f-cb4dabc647eb: 'Profile images' # Profile images
+    f218e1a6-a7e9-4e4b-9347-3c898ca1a9ec: Privacy # Privacy
+    fb9176a7-2175-4393-82de-c9cd6dbfc749: Story # Story
+    fd9f1440-7542-4670-b6cd-adb09b6d955b: $SITE_NAME # $SITE_NAME
+    ffbe5416-86fd-43c9-b592-ea36f6cc6aaa: Help # Help
+plugins:
+  agent:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.2.0
+    settings: null
+  assetrev:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  aws-s3:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: '1.2'
+    settings: null
+  content-stats:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  cookies:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  cp-clearcache:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  cp-field-inspect:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  default-dashboard:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings:
+      override: '1'
+      userDashboard: '1300'
+  delete-entry-versions:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  element-stats:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  feed-me:
+    edition: standard
+    enabled: true
+    schemaVersion: 4.4.0
+  field-manager:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  maintenance:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  minify:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  preparse-field:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.5
+    settings: null
+  redactor:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.3.0
+    settings: null
+  retour:
+    edition: standard
+    enabled: true
+    licenseKey: 9Q56OUMSXFFQOJVVF0RHEAXL
+    schemaVersion: 3.0.10
+    settings:
+      alwaysStripQueryString: false
+      automaticallyTrimStatistics: '1'
+      createUriChangeRedirects: false
+      dynamicRedirectDisplayLimit: 100
+      excludePatterns: ''
+      pluginName: Retour
+      preserveQueryString: false
+      recordRemoteIp: true
+      refreshIntervalSecs: 5
+      staticRedirectDisplayLimit: 100
+      statisticsRateLimitMs: '3600000'
+      statsDisplayLimit: 1000
+      statsStoredLimit: 400
+      stripQueryStringFromStats: true
+  seomatic:
+    edition: standard
+    enabled: true
+    licenseKey: T96K3YJF6RSV1W98WE1G4X3W
+    schemaVersion: 3.0.11
+    settings:
+      addHrefLang: true
+      addXDefaultHrefLang: true
+      cpTitlePrefix: '⚙ '
+      devModeCpTitlePrefix: '&#x1f6a7;⚙ '
+      devModeTitlePrefix: '&#x1f6a7; '
+      displayAnalysisSidebar: true
+      displayPreviewSidebar: true
+      environment: live
+      generatorEnabled: false
+      headersEnabled: true
+      maxDescriptionLength: 155
+      maxTitleLength: 70
+      pluginName: SEO
+      regenerateSitemapsAutomatically: true
+      renderEnabled: true
+      separatorChar: '|'
+      sidebarDisplayPreviewTypes:
+        - google
+        - twitter
+        - facebook
+      siteGroupsSeparate: '1'
+      sitemapsEnabled: true
+      socialMediaPreviewTarget: true
+  wordsmith:
+    edition: standard
+    enabled: true
+    schemaVersion: 0.0.0.0
+system:
+  edition: pro
+  live: true
+  name: $SITE_NAME
+  retryDuration: null
+  schemaVersion: 3.7.8
+  timeZone: UTC

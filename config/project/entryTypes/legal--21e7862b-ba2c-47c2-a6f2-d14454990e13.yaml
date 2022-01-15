@@ -1,0 +1,29 @@
+fieldLayouts:
+  506a8b27-3174-4186-bb4f-f7969766629a:
+    tabs:
+      -
+        elements:
+          -
+            instructions: null
+            label: Title
+            type: craft\fieldlayoutelements\EntryTitleField
+          -
+            fieldUid: 712bd1a5-485d-4df4-931c-335b9691181b
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Content
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: f597acd4-86e6-4e93-bbd1-e2efa3bd8792
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: SEO
+        sortOrder: 2
+handle: legal
+hasTitleField: true
+name: Legal
+section: f218e1a6-a7e9-4e4b-9347-3c898ca1a9ec # Privacy
+sortOrder: 1
+titleFormat: ''

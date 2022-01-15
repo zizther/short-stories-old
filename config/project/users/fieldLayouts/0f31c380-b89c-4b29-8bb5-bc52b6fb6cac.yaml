@@ -1,0 +1,70 @@
+tabs:
+  -
+    fields:
+      3a0c164a-7850-474e-9b98-01880660737f:
+        required: false
+        sortOrder: 10
+      7c251082-7efd-43f4-93d7-e9ce175f5e91:
+        required: false
+        sortOrder: 8
+      7d88c4e5-aac8-4fed-befa-36c024852ee6:
+        required: false
+        sortOrder: 2
+      36c801e7-52b1-4a67-b413-84a2953dbfde:
+        required: false
+        sortOrder: 4
+      313a06bc-5f1c-41da-a938-cb056c55931d:
+        required: false
+        sortOrder: 7
+      874fda5b-b4b8-498a-aff6-ff8f57d2fe7e:
+        required: false
+        sortOrder: 11
+      895fd5f9-abf9-4cc3-9b3b-c1036d0934dc:
+        required: false
+        sortOrder: 1
+      4759575c-b4a9-4cbd-b4e5-a57e0972bf3a:
+        required: false
+        sortOrder: 9
+      bf9ab5ae-bbc7-4281-9364-58702adbf96b:
+        required: false
+        sortOrder: 5
+      f0f88ed1-17e2-4ed0-91bd-c629d93694bb:
+        required: false
+        sortOrder: 3
+      f612fa14-f578-4f8e-a028-14531b627b13:
+        required: false
+        sortOrder: 6
+    name: Profile
+    sortOrder: 1
+  -
+    fields:
+      49ae52ec-6cf8-4451-9769-c2603b666e82:
+        required: false
+        sortOrder: 2
+      067eb3d2-653a-498a-856a-8df1fbd161ea:
+        required: false
+        sortOrder: 1
+      77d1bd5a-bd35-4b51-be5d-bd264f403c4f:
+        required: false
+        sortOrder: 3
+    name: 'Likes and votes'
+    sortOrder: 2
+  -
+    fields:
+      6fedcbe2-c104-4550-a1d3-8d9f368effee:
+        required: false
+        sortOrder: 4
+      6108d1a9-fc32-4cfc-aa9a-f5c9c28d80a9:
+        required: false
+        sortOrder: 2
+      9827669c-a13d-484a-b2c9-cc7c5e035d64:
+        required: false
+        sortOrder: 5
+      a9c11e83-d002-479d-a128-19c5c74163d8:
+        required: false
+        sortOrder: 1
+      eedb7c10-d20e-48f2-a45e-6646fc8c663f:
+        required: false
+        sortOrder: 3
+    name: Verification
+    sortOrder: 3

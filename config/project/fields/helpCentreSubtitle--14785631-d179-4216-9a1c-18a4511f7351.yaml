@@ -1,0 +1,16 @@
+contentColumnType: text
+fieldGroup: 1d2789df-9c58-42ce-80e8-27bcff45837c
+handle: helpCentreSubtitle
+instructions: ''
+name: Subtitle
+searchable: false
+settings:
+  charLimit: ''
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: '1'
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,19 @@
+contentColumnType: text
+fieldGroup: aab80d77-85b7-4c95-a616-05f06c738358
+handle: verificationBadgeRejected
+instructions: ''
+name: 'Verification badge rejected'
+searchable: '1'
+settings:
+  availableTransforms: '*'
+  availableVolumes: '*'
+  columnType: text
+  purifierConfig: ''
+  purifyHtml: '1'
+  redactorConfig: Basic.json
+  removeEmptyTags: '1'
+  removeInlineStyles: '1'
+  removeNbsp: '1'
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

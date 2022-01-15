@@ -1,0 +1,16 @@
+contentColumnType: text
+fieldGroup: 4e199960-01f1-4f9d-9d5d-be161e4d97f4
+handle: newsletterTitle
+instructions: ''
+name: 'Newsletter title'
+searchable: false
+settings:
+  charLimit: ''
+  code: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

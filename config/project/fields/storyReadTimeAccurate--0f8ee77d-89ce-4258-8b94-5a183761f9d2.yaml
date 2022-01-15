@@ -1,0 +1,19 @@
+contentColumnType: text
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyReadTimeAccurate
+instructions: "Gets the accurate read time of the story, with 2 decimal places.\r\n\r\nIf time is < 1 minutes it will show the decimals place, else it will round it up"
+name: 'Read time accurate'
+searchable: true
+settings:
+  allowSelect: false
+  columnType: text
+  decimals: '2'
+  displayType: textinput
+  fieldTwig: "{% set time = entry.storyFull | readTime %}\r\n{{ time < 1 ? time : time|round(0, 'ceil') }}"
+  parseBeforeSave: false
+  parseOnMove: false
+  showField: false
+  textareaRows: '5'
+translationKeyFormat: null
+translationMethod: none
+type: aelvan\preparsefield\fields\PreparseFieldType

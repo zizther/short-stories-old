@@ -1,0 +1,73 @@
+{% extends "_layouts/_layout" %}
+
+{% set pageRequireLogin = true %}
+
+{% set title = verificationBadge.verificationBadgeTitle | rv %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+
+	{% import "_macros/_errors" as errors %}
+
+    <div class="container page-content">
+        {% include 'account/_sidebar' %}
+
+		<div class="account-content main-content">
+            <h1>{{ title }}</h1>
+
+			{% if currentUser.memberVerificationRejected or (currentUser.memberVerificationRejected and currentUser.memberVerified) %}
+
+				{# Member has been rejected #}
+					{{ components.message('error', null, verificationBadge.verificationBadgeRejected) }}
+				</div>
+
+			{% elseif currentUser.memberVerified %}
+
+				{# Member is verified #}
+				{{ components.message('valid', null, verificationBadge.verificationBadgeAlreadyVerified) }}
+
+			{% elseif currentUser.memberRequestedVerification and not currentUser.memberVerified %}
+
+				{# Member has requested verification #}
+				{{ components.message('info', null, verificationBadge.verificationBadgeRequested) }}
+
+			{% else %}
+
+				{% set followers = craft.follow.getFollowers(user.id) %}
+				{% set followersCount = followers | length %}
+
+				{% if followersCount >= verificationBadge.verifiedFollowersCount %}
+					{# Member can apply for verification #}
+
+					{% import "_macros/_errors" as errors %}
+
+					<div class="message message-info">
+						<div class="message-content">
+							{{ verificationBadge.verificationBadgeEligible | rv }}
+
+							{# Verification form #}
+							<form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+								{{ csrfInput() }}
+			                    <input type="hidden" name="action" value="users/saveUser">
+			                    <input type="hidden" name="redirect" value="account/verify?success=true">
+			                    <input type="hidden" name="userId" value="{{ currentUser.id }}">
+								<input type="hidden" name="fields[memberRequestedVerification]" value="1">
+
+								<button class="button" type="submit">Verify your account</button>
+							</form>
+						</div>
+					</div>
+
+				{% else %}
+
+					{# Member does not have enough followers yet #}
+					{{ components.message('info', null, verificationBadge.verificationBadgeNotEligible) }}
+
+				{% endif %}
+
+			{% endif %}
+
+			{{ verificationBadge.verificationBadgeContent | rv }}
+        </div><!-- / .account-content -->
+    </div><!-- / .container -->
+{% endblock %}

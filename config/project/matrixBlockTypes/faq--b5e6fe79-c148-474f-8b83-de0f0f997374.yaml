@@ -1,0 +1,54 @@
+field: 03df4a13-2d06-49ca-a8e3-6b8dc17e6d26
+fieldLayouts:
+  f376dd04-8a17-4532-a864-aa874f699067:
+    tabs:
+      -
+        fields:
+          4f64deec-34a4-4311-a414-d9b10e548a64:
+            required: '1'
+            sortOrder: '1'
+          50a8138c-45db-4b40-9852-9027de2518c0:
+            required: '1'
+            sortOrder: '2'
+        name: Content
+        sortOrder: '1'
+fields:
+  4f64deec-34a4-4311-a414-d9b10e548a64:
+    contentColumnType: text
+    fieldGroup: null
+    handle: faqTitle
+    instructions: ''
+    name: 'FAQ Title'
+    searchable: '1'
+    settings:
+      charLimit: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  50a8138c-45db-4b40-9852-9027de2518c0:
+    contentColumnType: text
+    fieldGroup: null
+    handle: faqAnswer
+    instructions: ''
+    name: 'FAQ Answer'
+    searchable: '1'
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Basic.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: faq
+name: FAQ
+sortOrder: '1'

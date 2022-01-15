@@ -1,0 +1,13 @@
+fieldLayouts:
+  fe164608-c7bf-43c1-acee-bdf6d91d31c6:
+    tabs:
+      -
+        fields:
+          3f59b225-4119-4197-8a13-76aadc4d8683:
+            required: false
+            sortOrder: 1
+        name: Messages
+        sortOrder: 1
+handle: messages
+name: Messages
+sortOrder: 3

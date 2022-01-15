@@ -1,0 +1,153 @@
+{% extends "_layouts/_layout" %}
+
+{% import "_macros/_helpers" as helperMacros %}
+
+{% set entryId =  helperMacros.getStoryIdFromSlug(craft.app.request.getSegment(2)) %}
+{% set entry = craft.entries.id(entryId).one() %}
+
+{% if not entry %}
+    {% do seomatic.meta.seoTitle("404") %}
+    {% exit 404 %}
+{% endif %}
+
+{% if craft.app.request.segments|last != entry.slug %}
+    {% redirect entry.url %}
+{% endif %}
+
+{% set isCurrentAuthor = entry.author.id | isCurrentAuthor %}
+{% set storyTemplate = true %}
+{% set shareOnTemplate = true %}
+
+{% set authorName = entry.author.fullName %}
+
+{% set title = entry.title ~ ' by ' ~ authorName  %}
+
+{% set storyTitle = entry.title %}
+{% set storyReadTime = entry.storyReadTime %}
+{% set storyReadTimeValue = entry.storyReadTimeSearch %}
+{% set storyAuthorUrl = helperMacros.userUrl(entry.author) %}
+{% set storyAuthorProfile = entry.author.memberProfile.one() ?? profileImages.defaultProfileImage.one() %}
+{% set categories = entry.storyCategories.all() %}
+{% set storyCats = null %}
+
+{% for cat in categories %}
+	{% set spacer = loop.first ? '' : ', ' %}
+
+	{% set storyCats = storyCats ~ spacer ~ cat.title %}
+{% endfor %}
+
+{% js %}
+    var storyAuthorName = "{{ authorName }}";
+{% endjs %}
+
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+    <header class="story-hdr">
+	    <div class="inner">
+			<a class="scroll-top icon-arrow-up" href="#" title="Scroll to top"></a>
+
+	        <div class="story-meta">
+	           <div class="story-meta__deets">
+	                <span class="story-meta__title story-meta__ellipsis">{{ storyTitle }}</span>
+	               	<span class="story-meta__break">by</span>
+					<a class="story-meta__author story-meta__ellipsis" href="{{ storyAuthorUrl }}" title="All stories by {{ authorName }}">{{ authorName }}</a>
+	           </div><!-- / .story-meta-deets -->
+	        </div><!-- / .story-meta -->
+	    </div><!-- / .inner -->
+
+	    <div class="progress">
+	        <div class="progress-bar"></div>
+		</div>
+	</header><!-- / .story-hdr -->
+
+    <div class="container story-container">
+        {% if isCurrentAuthor %}
+            <a class="button button-small page-float-button" href="{{ url('write/' ~ helperMacros.username(currentUser) ~ '/' ~ entry.slug) }}" title="Edit story">Edit story</a>
+        {% endif %}
+
+		<h1>{{ storyTitle }}</h1>
+
+        <div class="story-meta">
+            {% if entry.storyExcerpt %}
+                <div class="story-meta__excerpt">
+                    <p>{{ entry.storyExcerpt }}</p>
+                </div>
+            {% endif %}
+
+            {% if entry.storyContainsBadWords %}
+				<div class="story-warnings">
+					<p>* Story contains bad language</p>
+				</div>
+			{% endif %}
+	    </div><!-- / .story-meta -->
+
+        {% include '_global/_story-author-slab' with {
+			user: entry.author,
+			position: 'top'
+		} %}
+
+		<article class="story-content">
+            {{ entry.storyContent | editor | raw }}
+
+            {% if beta %}
+    			<div class="story-flag">
+    				<svg class="svg-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+    					<path class="svg-flag__pole" fill="#cc4b4c" d="M52 23.5L10 40V4z"/>
+    					<path class="svg-flag__flag" fill="#424a60" d="M9 0a1 1 0 0 0-1 1v58a1 1 0 1 0 2 0V1a1 1 0 0 0-1-1z"/>
+    				</svg>
+    				Report
+    			</div>
+            {% endif %}
+		</article>
+
+        <div class="story-meta --bottom">
+            {% if categories | length %}
+                {% nav category in categories %}
+                    <a class="story-meta--link" href="{{ category.url }}" title"{{ category.title }}">{{ category.title }}</a>
+                {% endnav %}
+            {% endif %}
+
+            {% include '_global/_story-author-slab' with {
+    			user: entry.author,
+    			position: 'bottom'
+    		} %}
+        </div>
+    </div><!-- / .story-container -->
+
+    {% include '_global/_story-actions' %}
+
+	{# Show related stories #}
+    {% include 'stories/_related' with {
+		time: storyReadTimeValue,
+		currentEntry: entry.id
+	} %}
+
+	<script type="application/ld+json">
+		{
+		    "@context": "http://schema.org/",
+		    "@type": "Article",
+		    "name": "{{ entry.title }}",
+			"url": "{{ entry.url }}",
+		    "author": {
+				"@type": "Person",
+				{% if entry.author.memberProfile.one() %}
+					"image": "{{ entry.author.memberProfile.one().getUrl('memberMedium') }}",
+				{% endif %}
+					"url": "{{ helperMacros.userUrl(entry.author) }}",
+				    "name": "{{ entry.author.fullName }}"
+			},
+		{% if entry.storyCover.one() %}
+			"thumbnailUrl": "{{ entry.storyCover.one().getUrl('storyCoverSmall') }}",
+		    "image": "{{ entry.storyCover.one().getUrl('storyCoverMedium') }}",
+		{% endif %}
+			"description": "{{ entry.storyExcerpt }}",
+		    "aggregateRating": {
+		  		"@type": "AggregateRating",
+		    	"reviewCount": "{{ craft.users.relatedTo({targetElement: entry.id, field: 'memberLikes'}).count() }}"
+		  	},
+		  	"timeRequired": "PT{{ entry.storyReadTimeSearch }}M",
+		 	"genre": "{{ entry.storyCategories.one().url }}"
+		}
+	</script>
+{% endblock %}

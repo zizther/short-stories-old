@@ -1,0 +1,23 @@
+contentColumnType: string
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyCover
+instructions: ''
+name: 'Story cover'
+searchable: '1'
+settings:
+  allowedKinds:
+    - image
+  defaultUploadLocationSource: 'volume:aa0f2401-1948-4b0f-ab81-482924555e3f'
+  defaultUploadLocationSubpath: ''
+  limit: '1'
+  localizeRelations: false
+  restrictFiles: '1'
+  selectionLabel: ''
+  singleUploadLocationSource: 'volume:93e1addf-9136-45d7-8800-ac56cabeeadf'
+  singleUploadLocationSubpath: ''
+  sources: '*'
+  useSingleFolder: '1'
+  viewMode: large
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Assets

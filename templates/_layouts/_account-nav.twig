@@ -1,0 +1,35 @@
+{% import "_macros/_helpers" as helperMacros %}
+
+{% set accountNav = {
+    myProfile: {
+        name: "My profile",
+        url: helperMacros.userUrl(currentUser)
+    },
+    following: {
+        name: "Following",
+        url: url('account/following')
+    },
+	myBookmarks: {
+        name: "My bookmarks",
+        url: url('account/bookmarks')
+    },
+	writeStory: {
+        name: "Write a story",
+        url: url('write')
+    },
+	account: {
+        name: "Manage account",
+        url: url('account')
+    }
+} %}
+
+{% import "_macros/_helpers" as helperMacros %}
+
+
+{% for btn in accountNav %}
+	{{ helperMacros.accountNavBtn(btn.url, btn.name, 'div') }}
+{% endfor %}
+
+{% if signOut %}
+	{{ helperMacros.accountNavBtn(url('logout'), 'Sign out', 'div') }}
+{% endif %}

@@ -1,0 +1,9 @@
+siteUid: null
+sortOrder: 4
+template: stories/_entry
+uriParts:
+  - stories/
+  -
+    - '*'
+    - '[^\/]+'
+uriPattern: 'stories/<any:[^\/]+>'

@@ -1,0 +1,17 @@
+contentColumnType: text
+fieldGroup: aab80d77-85b7-4c95-a616-05f06c738358
+handle: verificationBadge
+instructions: 'The SVG code'
+name: 'Verification Badge'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: '1'
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

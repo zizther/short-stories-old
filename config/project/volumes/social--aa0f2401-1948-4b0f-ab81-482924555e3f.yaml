@@ -1,0 +1,19 @@
+handle: social
+hasUrls: true
+name: Social
+settings:
+  autoFocalPoint: ''
+  bucket: short-stories
+  bucketSelectionMode: choose
+  cfDistributionId: ''
+  cfPrefix: ''
+  expires: ''
+  keyId: $AWS_ACCESS_KEY_ID
+  makeUploadsPublic: '1'
+  region: eu-west-1
+  secret: $AWS_SECRET_ACCESS_KEY
+  storageClass: ''
+  subfolder: social
+sortOrder: 3
+type: craft\awss3\Volume
+url: $AWS_S3_URL

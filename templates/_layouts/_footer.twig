@@ -1,0 +1,15 @@
+<footer class="mn-ftr">
+    <a class="ftr-logo" href="{{ siteUrl }}" title="{{ siteName }}">
+        <svg viewBox="0 0 93.8 64.9" xmlns="http://www.w3.org/2000/svg" role="img">
+            <use xlink:href="#svg-logo"/>
+        </svg>
+    </a>
+
+    <nav class="ftr-nav">
+        {% for btn in footer.footerNav.all() %}
+            <a href="{{ btn.url }}" title="{{ btn.title }}">{{ btn.title }}</a>
+        {% endfor %}
+    </nav>
+
+    <div class="ftr-copyright">&copy; {{ now|date('Y') }}  {{ siteName }} <span class="ftr-cr-spc">|</span> All rights reserved.</div>
+</footer><!-- / .mn-ftr -->

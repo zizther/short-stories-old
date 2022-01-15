@@ -1,0 +1,46 @@
+{
+    "require": {
+        "spacecatninja/imager-x": "^3.5",
+        "besteadfast/craft-preparse-field": "^1.2",
+        "clubstudioltd/craft-asset-rev": "^6.0",
+        "craftcms/aws-s3": "^1.3",
+        "craftcms/cms": "^3.7",
+        "craftcms/element-api": "^2.8",
+        "craftcms/feed-me": "^4.4",
+        "craftcms/redactor": "^2.8",
+        "hashids/hashids": "^4.0",
+        "marknotton/agent": "^1.2",
+        "mmikkel/cp-clearcache": "^1.1",
+        "mmikkel/cp-field-inspect": "^1.2",
+        "mofodojodino/profanity-filter": "^1.3",
+        "nystudio107/craft-cookies": "^1.1",
+        "nystudio107/craft-minify": "^1.2",
+        "nystudio107/craft-retour": "^3.1",
+        "nystudio107/craft-seomatic": "^3.4",
+        "topshelfcraft/wordsmith": "^3.3",
+        "verbb/default-dashboard": "^1.0",
+        "verbb/field-manager": "^2.2",
+        "vlucas/phpdotenv": "^3.4",
+        "wbrowar/contentstats": "^2.1"
+    },
+    "require-dev": {
+        "yiisoft/yii2-shell": "^2.0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "modules\\": "modules/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.0"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    }
+}

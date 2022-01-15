@@ -1,0 +1,49 @@
+/*** User excerpt ***/
+.user-excerpt {
+    .col-frm {
+        display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		overflow: hidden;
+		padding-left: 30px;
+		padding-right: 30px;
+		text-align: center;
+    }
+    a {
+        color: $grey-dark;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    h2 {
+        font-family: $font-main-serif;
+        font-size: 2rem;
+        overflow: hidden;
+        text-align: center;
+        word-break: break-word;
+
+        @media #{$bp-small} {
+            font-size: 2.3rem;
+        }
+    }
+    &-profile {
+        @include size(90px);
+        display: block;
+        margin: 0 auto;
+    }
+
+    .author-stats {
+        margin: 15px auto 0;
+
+        .author-stats-box {
+            @media #{$bp-medium} {
+                margin: 0 5px;
+            }
+        }
+
+        .num {
+            font-size: 1.4rem;
+        }
+    }
+}

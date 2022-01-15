@@ -1,0 +1,14 @@
+{% extends "_layouts/_layout" %}
+
+{% set title = '404' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+	<div class="fourohfour">
+        <div class="container">
+        	<h1>Page not found</h1>
+
+        	<p>What’s worse, a hilarious 404 page can’t be found either.</p>
+        </div><!-- / .container -->
+	</div>
+{% endblock %}

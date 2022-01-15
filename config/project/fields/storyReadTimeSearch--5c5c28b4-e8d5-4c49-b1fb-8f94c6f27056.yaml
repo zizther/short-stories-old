@@ -1,0 +1,19 @@
+contentColumnType: integer
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyReadTimeSearch
+instructions: "Get the read time search value - This is used for the site search.\r\nWant to output whole numbers - Rounded to the closest number."
+name: 'Story read time search'
+searchable: true
+settings:
+  allowSelect: false
+  columnType: integer
+  decimals: '0'
+  displayType: textinput
+  fieldTwig: "{% set storyContent = entry.storyContent | editor %}\r\n{% set time = storyContent | readTime %}\r\n{% set timeRounded = time|round(0) %}\r\n{{ timeRounded }}"
+  parseBeforeSave: false
+  parseOnMove: false
+  showField: false
+  textareaRows: '5'
+translationKeyFormat: null
+translationMethod: none
+type: aelvan\preparsefield\fields\PreparseFieldType

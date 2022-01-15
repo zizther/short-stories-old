@@ -1,0 +1,38 @@
+{% extends "_layouts/_layout" %}
+
+{% set title = 'Bookmarks' %}
+{% do seomatic.meta.seoTitle(title) %}
+
+{% block content %}
+    <div class="container">
+        {% if not currentUser %}
+            <p>You need to <a href="{{ url('login') }}" title="Login">login</a> in order to see your bookmarks.</p>
+        {% else %}
+			{% set bookmarksTotal = currentUser.memberBookmarks.total() %}
+			{% paginate currentUser.memberBookmarks.limit(12) as pageInfo, bookmarkEntries %}
+
+			{% if bookmarksTotal > 0 %}
+				{% include '_global/_pagination' with {
+					position: 'top',
+					entriesInfo: pageInfo
+				} %}
+
+				<div class="grid">
+					{% for entry in bookmarkEntries %}
+						{% include '_global/_story-excerpt' with { entry: entry } %}
+					{% endfor %}
+				</div>
+
+				{% include '_global/_pagination' with {
+					position: 'bottom',
+					entriesInfo: pageInfo
+				} %}
+			{% else %}
+				<div class="message message--spacing-top">
+					<h2>You don't have any bookmarks</h2>
+					<p>Bookmark any story to see them appear in this list.</p>
+				</div>
+			{% endif %}
+        {% endif %}
+    </div><!-- / .container -->
+{% endblock %}

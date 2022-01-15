@@ -1,0 +1,19 @@
+handle: site
+hasUrls: true
+name: Site
+settings:
+  autoFocalPoint: ''
+  bucket: short-stories
+  bucketSelectionMode: choose
+  cfDistributionId: ''
+  cfPrefix: ''
+  expires: ''
+  keyId: $AWS_ACCESS_KEY_ID
+  makeUploadsPublic: '1'
+  region: eu-west-1
+  secret: $AWS_SECRET_ACCESS_KEY
+  storageClass: ''
+  subfolder: site
+sortOrder: 2
+type: craft\awss3\Volume
+url: 'https://s3.eu-west-1.amazonaws.com/short-stories/'

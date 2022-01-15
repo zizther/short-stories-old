@@ -1,0 +1,38 @@
+/*** Tweet Content ***/
+.tweet-this {
+    background: rgba(0, 0, 0, .9);
+    border-radius: 4px;
+	color: $white;
+	display: none;
+    font-size: 1.2rem;
+	padding: 9px 12px;
+	position: absolute;
+	text-decoration: none;
+	transition: none 0 ease 0;
+	visibility: hidden;
+	z-index: 500;
+
+	&::after {
+    	@include absolute(bottom -10px left 50%);
+    	@include triangle(10px, down, rgba(0, 0, 0, .9));
+    	content: '';
+    	margin-left: -5px;
+	}
+
+    &.active {
+    	animation: pop-upwards 180ms forwards 1;
+        display: block;
+    	transition: top .075s ease-out, left .075s ease-out;
+    	visibility: visible;
+    }
+    &:hover {
+        text-decoration: none;
+    }
+
+    i {
+        margin-right: 2px;
+    }
+}
+.highlight {
+    background-color: yellow;
+}

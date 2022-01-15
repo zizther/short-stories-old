@@ -1,0 +1,73 @@
+fieldLayouts:
+  dd2392ee-e478-45e8-898c-4e28e6edc1b2:
+    tabs:
+      -
+        elements:
+          -
+            instructions: null
+            label: Title
+            type: craft\fieldlayoutelements\EntryTitleField
+          -
+            fieldUid: 75f63c96-8ada-436b-8a00-080d5ac9e859
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 8f9e16a6-fb24-4344-ad24-6787b927a20d
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: fd684793-9dc0-42b3-8272-e939f4364256
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 6ad1b211-b50c-4aa3-afed-5ec937360e01
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Story
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: b7e3e76d-bbfa-442c-8c26-a631962c38b5
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: f80f1ce5-98f7-427b-9cf3-7cc243209fb3
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Meta
+        sortOrder: 2
+      -
+        elements:
+          -
+            fieldUid: f0e80b7e-734a-49cc-9354-e904575163d8
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 9e366c6d-8a0c-4a8f-8c6c-6156a56eca25
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Contains
+        sortOrder: 3
+      -
+        elements:
+          -
+            fieldUid: 5c5c28b4-e8d5-4c49-b1fb-8f94c6f27056
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 746a3a57-5309-4884-b1b2-2be3f0480f55
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: 2af04d22-e534-4eb8-932d-a5b8384ed497
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: 'Read time'
+        sortOrder: 4
+handle: stories
+hasTitleField: true
+name: Stories
+section: 1dcb8fbd-f043-48c7-8c27-ee463cd47d0b # Stories
+sortOrder: 0
+titleFormat: ''

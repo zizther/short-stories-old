@@ -1,0 +1,31 @@
+<div class="modal login-modal" id="login-modal">
+    <div class="modal-actions">
+        <a class="button border-white" href="{{ url('signup') }}" title="Signup">Signup</a>
+        <div class="modal-close icon-close"></div>
+    </div><!-- / .modal-actions -->
+
+    <div class="login-form-wpr modal-bounce">
+        <h2>Let's login!</h2>
+
+        <form id="login-form" method="post" accept-charset="UTF-8">
+            {{ csrfInput() }}
+            <input type="hidden" name="action" value="users/login">
+            <input type="hidden" name="redirect" value="{{ craft.request.getUrl() }}">
+
+            <input class="form-element" type="text" name="loginName" placeholder="Username or email" value="{{ craft.app.user.rememberedUsername }}">
+
+            <input class="form-element" type="password" name="password" placeholder="Password">
+
+            <div class="login-form-meta">
+                <label class="remember-me" for="remember-me">
+                    <input id="remember-me" type="checkbox" name="rememberMe" value="1">
+                    Remember me
+                </label><!-- / .login-form-meta -->
+
+                <a class="forgot-password" href="{{ url('login/forgot-password') }}">Forget your password?</a>
+            </div><!-- / .login-form-meta -->
+
+            <button class="button button-large button-black login-form-submit" type="submit">Login</button>
+        </form>
+    </div>
+</div>

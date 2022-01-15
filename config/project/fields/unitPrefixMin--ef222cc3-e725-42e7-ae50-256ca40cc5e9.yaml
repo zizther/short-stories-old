@@ -1,0 +1,15 @@
+contentColumnType: text
+fieldGroup: 05904d94-0379-4974-8372-6a0b14586da5
+handle: unitPrefixMin
+instructions: ''
+name: 'Unit prefix min'
+searchable: '1'
+settings:
+  charLimit: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

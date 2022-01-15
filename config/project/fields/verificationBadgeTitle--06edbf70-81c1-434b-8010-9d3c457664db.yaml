@@ -1,0 +1,15 @@
+contentColumnType: text
+fieldGroup: aab80d77-85b7-4c95-a616-05f06c738358
+handle: verificationBadgeTitle
+instructions: ''
+name: 'Verification badge title'
+searchable: '1'
+settings:
+  charLimit: ''
+  columnType: text
+  initialRows: '4'
+  multiline: ''
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

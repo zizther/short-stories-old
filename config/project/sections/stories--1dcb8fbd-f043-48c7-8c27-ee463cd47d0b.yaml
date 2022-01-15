@@ -1,0 +1,15 @@
+enableVersioning: true
+handle: stories
+name: Stories
+previewTargets:
+  -
+    label: 'Primary entry page'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  8539cb22-f67d-4219-8f6e-da97f89e6196: # $SITE_NAME
+    enabledByDefault: true
+    hasUrls: true
+    template: stories/_entry
+    uriFormat: 'stories/{slug}'
+type: channel

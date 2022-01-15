@@ -1,0 +1,9 @@
+siteUid: null
+sortOrder: 6
+template: authors/_entry
+uriParts:
+  - authors/
+  -
+    - slug
+    - '[^\/]+'
+uriPattern: 'authors/<slug:[^\/]+>'

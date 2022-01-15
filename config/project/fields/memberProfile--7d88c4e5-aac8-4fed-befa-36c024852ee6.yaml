@@ -1,0 +1,23 @@
+contentColumnType: string
+fieldGroup: c6a8cf07-e8f1-48db-a89c-b02f0a7a1c91
+handle: memberProfile
+instructions: 'The image will be cropped in from the centre.'
+name: 'Profile image'
+searchable: '1'
+settings:
+  allowedKinds:
+    - image
+  defaultUploadLocationSource: 'volume:aa0f2401-1948-4b0f-ab81-482924555e3f'
+  defaultUploadLocationSubpath: ''
+  limit: '1'
+  localizeRelations: false
+  restrictFiles: '1'
+  selectionLabel: ''
+  singleUploadLocationSource: 'volume:36f8626b-79c9-4763-888b-84c693d8b72a'
+  singleUploadLocationSubpath: ''
+  sources: '*'
+  useSingleFolder: '1'
+  viewMode: large
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Assets

@@ -1,0 +1,33 @@
+fieldLayouts:
+  e49c6c49-e1c4-441f-a485-a76bbcf4e591:
+    tabs:
+      -
+        elements:
+          -
+            instructions: null
+            label: Title
+            type: craft\fieldlayoutelements\EntryTitleField
+          -
+            fieldUid: e420ecbb-8009-4380-8889-37870ecb991d
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+          -
+            fieldUid: fc742864-ee45-41b8-b5f1-652355c49075
+            required: false
+            type: craft\fieldlayoutelements\CustomField
+        name: Content
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: f597acd4-86e6-4e93-bbd1-e2efa3bd8792
+            required: true
+            type: craft\fieldlayoutelements\CustomField
+        name: SEO
+        sortOrder: 2
+handle: help
+hasTitleField: true
+name: Help
+section: f6c0b76f-1e8e-4f14-92e2-12f84d3f61ba # Help
+sortOrder: 1
+titleFormat: ''

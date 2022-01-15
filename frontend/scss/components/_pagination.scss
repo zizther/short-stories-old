@@ -1,0 +1,44 @@
+/*** Pagination ***/
+.pagination {
+    font-size: 0;
+
+	&--top {
+		border-bottom: 1px solid $grey-light;
+		margin-bottom: 60px;
+
+		.pag-btn {
+	        border-bottom: 2px solid transparent;
+		}
+	}
+	&--bottom {
+		border-top: 1px solid $grey-light;
+		margin-top: 80px;
+
+		.pag-btn {
+	        border-top: 2px solid transparent;
+		}
+	}
+
+    .pagination-btns {
+        display: table;
+        margin: 0 auto;
+    }
+    .pag-btn {
+        color: $grey-medium;
+        display: inline-block;
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin: 0 4px;
+        padding: 12px 10px 5px;
+        transition: color 150ms ease-out;
+
+        &:hover {
+            color: $green;
+            text-decoration: none;
+        }
+        &.current {
+            border-color: $green;
+            color: $green;
+        }
+    }
+}

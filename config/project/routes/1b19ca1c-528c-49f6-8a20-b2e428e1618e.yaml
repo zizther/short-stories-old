@@ -1,0 +1,13 @@
+siteUid: null
+sortOrder: 5
+template: write
+uriParts:
+  - write/
+  -
+    - slug
+    - '[^\/]+'
+  - /
+  -
+    - '*'
+    - '[^\/]+'
+uriPattern: 'write/<slug:[^\/]+>/<any:[^\/]+>'

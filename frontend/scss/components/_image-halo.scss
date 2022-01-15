@@ -1,0 +1,60 @@
+/*** Image halo ***/
+.image-halo {
+    display: inline-block;
+    position: relative;
+
+    &__lines {
+        @include absolute(top -7px left -7px);
+        @include size(calc(100% + 14px));
+        display: inline-block;
+        fill: $green;
+        transform: rotate(45deg);
+    }
+    &--small {
+        img {
+            @include size(40px);
+
+			@media #{$bp-medium} {
+				@include size(50px);
+			}
+        }
+		.image-halo__lines {
+	        @include absolute(top -5px left -5px);
+			@include size(calc(100% + 10px));
+		}
+    }
+    &--medium {
+        img {
+            @include size(120px);
+
+            @media #{$bp-medium} {
+                @include size(150px);
+            }
+        }
+
+        &-small {
+            img {
+                @include size(100px);
+
+                @media #{$bp-medium} {
+                    @include size(120px);
+                }
+            }
+        }
+    }
+    &--large {
+        img {
+            @include size(160px);
+
+            @media #{$bp-medium} {
+                @include size(200px);
+            }
+        }
+    }
+
+    img {
+		border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+    }
+}

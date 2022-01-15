@@ -1,0 +1,17 @@
+contentColumnType: mediumtext
+fieldGroup: 34cac1b4-f567-4d44-b565-905df2d71cd0
+handle: storyContent
+instructions: 'The JSON content for editor.js'
+name: 'Story content'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: mediumtext
+  initialRows: '7'
+  multiline: '1'
+  placeholder: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

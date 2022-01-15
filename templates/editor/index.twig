@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+
+    <title>{{ siteName }} Editor & JSON output</title>
+
+    <style media="screen">
+        body {
+            background: linear-gradient(to bottom, rgba(243,249,254,1) 0%,rgba(243,249,254,0) 80%);
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+        .clearfix::after {
+            clear: both;
+            content: '';
+            display: table;
+        }
+
+        .loader {
+            background: #fff;
+            left: 0;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            z-index: 100;
+        }
+        .loader::after {
+            content: 'Loading...';
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            padding: 0 20px 30px;
+        }
+
+        .left {
+            margin-bottom: 60px;
+        }
+
+        .editor-wpr,
+        .output-wpr {
+            background: #eef5fa;
+            border-radius: 15px;
+            padding: 25px 20px;
+        }
+        .editor-inner {
+            background: #fff;
+            border-radius: 8px;
+            box-sizing: border-box;
+            box-shadow: 0 24px 24px -18px rgba(69,104,129,.33), 0 9px 45px 0 rgba(114,119,160,.12);
+            font-size: 16px;
+            padding: 35px 25px;
+        }
+
+        .output {
+            background: transparent;
+            border: none;
+            font-family: monospace;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+            width: 100%;
+        }
+
+        .btn {
+            background-color: #388ffe;
+            border-radius: 3px;
+            box-shadow: 0 9px 12px -6px rgba(11,132,242,.78);
+            display: inline-block;
+            cursor: pointer;
+            outline: none;
+            padding: 9px;
+            transition: all .15s ease-out;
+            will-change: background-color, box-shadow;
+        }
+        .btn:hover {
+            background-color: #3684fe;
+            box-shadow: 0 9px 16px -6px rgba(11,132,242,.78);
+        }
+        .btn svg {
+            fill: #fff;
+            position: relative;
+            top: 2px;
+            width: 20px;
+        }
+
+        .toolbar {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .toolbar .btn {
+            margin-right: 10px;
+        }
+
+        .tooltip {
+            display: inline-block;
+            position: relative;
+        }
+
+        .tooltip .tooltiptext {
+            background-color: #388ffe;
+            border-radius: 3px;
+            box-shadow: 0 9px 12px -6px rgba(11,132,242,.78);
+            bottom: 150%;
+            color: #fff;
+            font-size: 13px;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            padding: 5px;
+            position: absolute;
+            text-align: center;
+            transition: opacity 0.3s;
+            visibility: hidden;
+            width: 140px;
+            z-index: 5;
+        }
+
+        .tooltip .tooltiptext::after {
+            border-color: #388ffe transparent transparent transparent;
+            border-style: solid;
+            border-width: 5px;
+            content: '';
+            left: 50%;
+            margin-left: -5px;
+            position: absolute;
+            top: 100%;
+        }
+
+        .tooltip:hover .tooltiptext {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                text-align: left;
+            }
+            .container {
+                padding: 0 20px 50px;
+            }
+            .container::before {
+                background: #e0e0e0;
+                content: '';
+                height: 100%;
+                left: 55%;
+                position: fixed;
+                top: 0;
+                z-index: 2;
+                width: 1px;
+            }
+            .left,
+            .right {
+                min-height: 100vh;
+                padding: 0 2%;
+                position: relative;
+            }
+            .left {
+                float: left;
+                width: 51%;
+            }
+            .right {
+                float: right;
+                width: 41%;
+            }
+            .toolbar {
+                text-align: left;
+            }
+            .toolbar--right {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+
+    <div class="container clearfix">
+        <div class="left">
+            <h1>Editor</h1>
+
+            <div class="toolbar toolbar--right">
+                <div class="tooltip">
+                    <div class="btn btn-clear">
+                        <span class="tooltiptext" id="tooltip-clear">Clear text</span>
+
+                        <svg viewBox="-40 0 427 427.001" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m232.398438 154.703125c-5.523438 0-10 4.476563-10 10v189c0 5.519531 4.476562 10 10 10 5.523437 0 10-4.480469 10-10v-189c0-5.523437-4.476563-10-10-10zm0 0"/>
+                            <path d="m114.398438 154.703125c-5.523438 0-10 4.476563-10 10v189c0 5.519531 4.476562 10 10 10 5.523437 0 10-4.480469 10-10v-189c0-5.523437-4.476563-10-10-10zm0 0"/>
+                            <path d="m28.398438 127.121094v246.378906c0 14.5625 5.339843 28.238281 14.667968 38.050781 9.285156 9.839844 22.207032 15.425781 35.730469 15.449219h189.203125c13.527344-.023438 26.449219-5.609375 35.730469-15.449219 9.328125-9.8125 14.667969-23.488281 14.667969-38.050781v-246.378906c18.542968-4.921875 30.558593-22.835938 28.078124-41.863282-2.484374-19.023437-18.691406-33.253906-37.878906-33.257812h-51.199218v-12.5c.058593-10.511719-4.097657-20.605469-11.539063-28.03125-7.441406-7.421875-17.550781-11.5546875-28.0625-11.46875h-88.796875c-10.511719-.0859375-20.621094 4.046875-28.0625 11.46875-7.441406 7.425781-11.597656 17.519531-11.539062 28.03125v12.5h-51.199219c-19.1875.003906-35.394531 14.234375-37.878907 33.257812-2.480468 19.027344 9.535157 36.941407 28.078126 41.863282zm239.601562 279.878906h-189.203125c-17.097656 0-30.398437-14.6875-30.398437-33.5v-245.5h250v245.5c0 18.8125-13.300782 33.5-30.398438 33.5zm-158.601562-367.5c-.066407-5.207031 1.980468-10.21875 5.675781-13.894531 3.691406-3.675781 8.714843-5.695313 13.925781-5.605469h88.796875c5.210937-.089844 10.234375 1.929688 13.925781 5.605469 3.695313 3.671875 5.742188 8.6875 5.675782 13.894531v12.5h-128zm-71.199219 32.5h270.398437c9.941406 0 18 8.058594 18 18s-8.058594 18-18 18h-270.398437c-9.941407 0-18-8.058594-18-18s8.058593-18 18-18zm0 0"/>
+                            <path d="m173.398438 154.703125c-5.523438 0-10 4.476563-10 10v189c0 5.519531 4.476562 10 10 10 5.523437 0 10-4.480469 10-10v-189c0-5.523437-4.476563-10-10-10zm0 0"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-wpr">
+                <div class="editor-inner">
+                    <div class="editor" id="editor"></div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <h1>JSON</h1>
+
+            <div class="toolbar">
+                <div class="tooltip">
+                    <div class="btn btn-json">
+                        <span class="tooltiptext" id="tooltip-convert">Convert to JSON</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 384">
+                            <path d="M64,0v80H0v144h64v160h224l96-96V0H64z M16,208V96h240v112H16z M288,361.376V288h73.376L288,361.376z M368,272h-96v96H80 V224h192V80H80V16h288V272z"/>
+                            <path d="M50.848,115.168v48.976c0,3.648-0.384,6.352-1.184,8.112c-0.816,1.744-2.448,2.64-4.96,2.64 c-2.512,0-4.144-0.896-4.944-2.64c-0.816-1.776-1.2-4.464-1.2-8.112v-2.128H25.872v2.992c0,2.672,0.256,5.248,0.768,7.664 c0.512,2.432,1.456,4.544,2.832,6.384c1.376,1.84,3.248,3.232,5.584,4.224c2.336,1.008,5.328,1.504,8.976,1.504 c6.992,0,12.16-1.568,15.552-4.656c3.408-3.12,5.088-8.32,5.088-15.616v-49.344H50.848z"/>
+                            <path d="M121.808,158.272c-0.4-1.744-1.072-3.312-2.064-4.752c-0.992-1.44-2.32-2.784-3.984-4.032 c-1.664-1.264-3.808-2.464-6.432-3.616l-10.656-4.608c-2.928-1.2-4.848-2.528-5.744-3.984c-0.912-1.44-1.344-3.2-1.344-5.328 c0-1.024,0.112-2.016,0.336-2.976s0.64-1.808,1.248-2.544c0.608-0.736,1.424-1.328,2.448-1.776 c1.008-0.432,2.288-0.672,3.824-0.672c2.688,0,4.608,0.896,5.76,2.64c1.152,1.776,1.728,4.288,1.728,7.552h13.248v-1.92 c0-3.264-0.544-6.064-1.6-8.4c-1.04-2.32-2.528-4.24-4.4-5.744c-1.888-1.52-4.144-2.592-6.736-3.264 c-2.576-0.672-5.424-1.008-8.48-1.008c-6.592,0-11.792,1.664-15.568,4.992s-5.664,8.368-5.664,15.152 c0,2.832,0.336,5.296,1.04,7.456c0.704,2.144,1.808,4.032,3.312,5.664c1.52,1.648,3.376,3.072,5.632,4.272 c2.24,1.216,4.896,2.352,7.968,3.376c2.288,0.768,4.224,1.52,5.792,2.256c1.568,0.736,2.832,1.536,3.792,2.448 c0.976,0.88,1.664,1.888,2.064,3.008c0.416,1.12,0.624,2.448,0.624,3.984c0,2.864-0.848,5.008-2.544,6.384 c-1.68,1.376-3.584,2.064-5.696,2.064c-1.792,0-3.28-0.272-4.464-0.768c-1.184-0.512-2.128-1.216-2.832-2.128 c-0.704-0.896-1.184-2-1.44-3.312c-0.256-1.296-0.4-2.752-0.4-4.352h0v-2.016H76.752v2.784c0,6.336,1.68,11.2,5.04,14.592 c3.36,3.392,8.944,5.088,16.752,5.088c7.488,0,13.328-1.664,17.52-4.96c4.208-3.296,6.304-8.56,6.304-15.792 C122.368,161.92,122.192,160,121.808,158.272z"/>
+                            <path d="M179.504,135.088c-0.48-4.368-1.52-8.144-3.168-11.28c-1.616-3.12-3.984-5.584-7.04-7.344 c-3.072-1.744-7.2-2.64-12.384-2.64c-5.168,0-9.312,0.896-12.368,2.64c-3.072,1.76-5.408,4.224-7.056,7.344 c-1.616,3.136-2.688,6.912-3.168,11.28c-0.48,4.4-0.72,9.184-0.72,14.352c0,5.232,0.256,10.048,0.72,14.384 c0.48,4.352,1.536,8.096,3.168,11.232c1.632,3.136,3.984,5.536,7.056,7.2c3.056,1.648,7.2,2.496,12.368,2.496 c5.184,0,9.312-0.832,12.384-2.496c3.056-1.664,5.408-4.064,7.04-7.2c1.632-3.136,2.688-6.88,3.168-11.232 c0.48-4.336,0.72-9.152,0.72-14.384C180.224,144.256,179.984,139.472,179.504,135.088z M166.112,161.2 c-0.224,3.232-0.672,5.856-1.344,7.872c-0.672,2.016-1.632,3.472-2.88,4.416c-1.264,0.928-2.912,1.392-4.96,1.392 c-2.048,0-3.696-0.464-4.944-1.392s-2.208-2.4-2.88-4.416s-1.12-4.64-1.344-7.872s-0.336-7.136-0.336-11.744 c0-4.608,0.096-8.512,0.336-11.712c0.224-3.2,0.672-5.824,1.344-7.872c0.672-2.048,1.632-3.52,2.88-4.448 c1.264-0.944,2.896-1.408,4.944-1.408c2.048,0,3.712,0.464,4.96,1.408c1.248,0.912,2.208,2.4,2.88,4.448 c0.672,2.048,1.136,4.672,1.344,7.872s0.336,7.104,0.336,11.712C166.448,154.064,166.336,157.968,166.112,161.2z"/>
+                            <path d="M227.024 115.168L227.024 162.128 226.816 162.128 210.112 115.168 194.176 115.168 194.176 183.712 206.848 183.712 206.848 135.712 207.056 135.712 223.952 183.712 239.696 183.712 239.696 115.168z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="tooltip">
+                    <div class="btn btn-copy">
+                        <span class="tooltiptext" id="tooltip-copy">Copy to clipboard</span>
+
+                        <svg viewBox="-40 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m271 512h-191c-44.113281 0-80-35.886719-80-80v-271c0-44.113281 35.886719-80 80-80h191c44.113281 0 80 35.886719 80 80v271c0 44.113281-35.886719 80-80 80zm-191-391c-22.054688 0-40 17.945312-40 40v271c0 22.054688 17.945312 40 40 40h191c22.054688 0 40-17.945312 40-40v-271c0-22.054688-17.945312-40-40-40zm351 261v-302c0-44.113281-35.886719-80-80-80h-222c-11.046875 0-20 8.953125-20 20s8.953125 20 20 20h222c22.054688 0 40 17.945312 40 40v302c0 11.046875 8.953125 20 20 20s20-8.953125 20-20zm0 0"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-wpr">
+                <div class="output" id="output"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/@editorjs/editorjs@2,npm/@editorjs/header@2,npm/@editorjs/quote@2,npm/@editorjs/delimiter@1"></script>
+    <script>
+        var editor,
+            outputEl,
+            sanitizerConfig = {
+                b: {}, // leave <b> without attributes
+                strong: {}, // leave <strong> without attributes
+                i: {}, // leave <i> without attributes
+                em: {}, // leave <em> without attributes
+                u: {}, // leave <u> without attributes
+                p: {} // leave <p> without attributes
+            };
+
+        $(document).ready(function(){
+
+            outputEl = document.getElementById('output');
+
+            // Editor
+            editor = new EditorJS({
+                // Create a holder for the Editor and pass its ID
+                holder: 'editor',
+
+                // Place holder content
+                placeholder: "Let's write an awesome story!",
+
+                // Available Tools list. Pass Tool's class or Settings object for each Tool you want to use
+                tools: {
+                    header: {
+                        class: Header,
+                        inlineToolbar : true,
+                        shortcut: 'CMD+SHIFT+H'
+                    },
+                    quote: {
+                        class: Quote,
+                        inlineToolbar: true,
+                        shortcut: 'CMD+SHIFT+O',
+                        config: {
+                            quotePlaceholder: 'Enter a quote',
+                            captionPlaceholder: 'Quote by'
+                        },
+                    },
+                    delimiter: Delimiter
+                }
+            });
+
+            // Editor is ready
+            editor.isReady.then(function() {
+                $('.loader').hide();
+            })
+            .catch(function(reason) {
+                alert(`Editor.js initialization failed because of ${reason}`);
+            });
+
+
+            // Buttons
+            $('.btn-clear').click(function(){
+                editor.blocks.clear();
+                outputEl.innerText = '';
+            });
+
+            $('.btn-json').click(function() {
+                outputJson();
+            });
+
+            $('.btn-copy').click(function(){
+                copyToClipboard();
+                $('#tooltip-copy').text('Copied to clipboard!');
+            });
+            $('.btn-copy').mouseleave(function() {
+                $('#tooltip-copy').text('Copy to clipboard');
+            });
+
+        });
+
+        function outputJson() {
+            editor.save().then(function(savedData) {
+                var cleanStory = editor.sanitizer.clean(savedData, sanitizerConfig);
+
+                showContent(savedData, outputEl);
+            }).catch(function(error) {
+                console.log('Saving failed: ', error)
+            });
+        }// END outputJson
+
+        function showContent(e, container) {
+            // e = function(e) {
+            //     return e = (e = (e = (e = (e = (e = e.replace(/"(\w+)"\s?:/g, '"<span class=sc_key>$1</span>" :')).replace(/"(paragraph|quote|list|header|linkTool|code|image|delimiter|rawTool|table|embed)"/g, '"<span class=sc_toolname>$1</span>"')).replace(/(&lt;[\/a-z]+(&gt;)?)/gi, "<span class=sc_tag>$1</span>")).replace(/"([^"]+)"/gi, '"<span class=sc_attr>$1</span>"')).replace(/\b(true|false|null)\b/gi, "<span class=sc_bool>$1</span>")).replace(/\b(\d+)\b/gi, "<span class=sc_digit>$1</span>")
+            // }(e = (e = JSON.stringify(e, null, 4)).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"));
+
+            container.innerText = JSON.stringify(e);
+        }// END showContent
+
+        function copyToClipboard() {
+            // Get content
+            var str = outputEl.innerText;
+
+            // Make fake textarea
+            var el = document.createElement('textarea');
+            // Place content in textarea
+            el.value = str;
+
+            // Set textarea attrs
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+
+            // Add fake textarea to DOM
+            document.body.appendChild(el);
+
+            el.select();
+            el.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            document.execCommand('copy');
+
+            // Remove the fake textarea
+            document.body.removeChild(el);
+        }// END copyToClipboard
+    </script>
+</body>
+</html>
